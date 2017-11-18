@@ -51,6 +51,13 @@
             android:text="Qual dia começa a medicação?"
             android:layout_marginBottom="10dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cad_txt_data"
+            android:text="data"
+            android:layout_marginBottom="10dp"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +71,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Qual horario irá tomar?"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cad_txt_hora"
+            android:text="hora"
             android:layout_marginBottom="10dp"/>
 
         <Button
