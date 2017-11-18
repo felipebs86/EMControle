@@ -13,6 +13,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
@@ -133,18 +134,41 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         }
 
         if(view == btnImagem){
-            AlertDialog.Builder ImageDialog = new AlertDialog.Builder(ActivityCadastro.this);
-            ImageDialog.setTitle("Locais de Aplicação");
-            ImageView showImage = new ImageView(ActivityCadastro.this);
-            ImageDialog.setView(showImage);
+//            AlertDialog.Builder ImageDialog = new AlertDialog.Builder(ActivityCadastro.this);
+//            ImageDialog.setTitle("Locais de Aplicação");
+//            //ImageView showImage = new ImageView(ActivityCadastro.this);
+//            LayoutInflater factory = LayoutInflater.from(ActivityCadastro.this);
+//            final ImageView v = (ImageView) factory.inflate(R.layout.imagem_local, null);
+//            v.setImageResource(R.drawable.person);
+//            ImageDialog.setView(v);
+//
+//            ImageDialog.setNegativeButton("ok", new DialogInterface.OnClickListener()
+//            {
+//                public void onClick(DialogInterface arg0, int arg1)
+//                {
+//                }
+//            });
+//            ImageDialog.show();
 
-            ImageDialog.setNegativeButton("ok", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface arg0, int arg1)
-                {
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.imagem_local);
+            dialog.setTitle("Locais de aplicação");
+
+            // set the custom dialog components - text, image and button
+            //TextView text = (TextView) dialog.findViewById(R.id.text);
+            //text.setText("Android custom dialog example!");
+            ImageView image = (ImageView) dialog.findViewById(R.id.cad_imagem_local);
+            image.setImageResource(R.drawable.person);
+
+            FloatingActionButton dialogButton = (FloatingActionButton) dialog.findViewById(R.id.cad_imagem_fechar);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
                 }
             });
-            ImageDialog.show();
+            dialog.show();
         }
 
     }
