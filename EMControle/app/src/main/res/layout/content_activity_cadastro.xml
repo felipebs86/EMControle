@@ -51,21 +51,27 @@
             android:text="Qual dia começa a medicação?"
             android:layout_marginBottom="10dp"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cad_txt_data"
-            android:text="data"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cad_btn_data_inicio"
-            android:text="Escolha a data"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:textColor="#ffffff"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_txt_data"
+                android:hint="DD/MM/AAAA"
+                android:layout_marginRight="30dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecione a data"
+                android:id="@+id/cad_btn_data"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="#ffffff"/>/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -73,21 +79,27 @@
             android:text="Qual horario irá tomar?"
             android:layout_marginBottom="10dp"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cad_txt_hora"
-            android:text="hora"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cad_btn_alarme"
-            android:text="Escolha a hora"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:textColor="#ffffff"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_txt_hora"
+                android:hint="HH:MM"
+                android:layout_marginRight="30dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecione o horario"
+                android:id="@+id/cad_btn_alarme"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="#ffffff"/>/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -109,22 +121,28 @@
             android:text="Qual o local da próxima aplicação?"
             android:layout_marginBottom="10dp"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cad_btn_locais"
-            android:text="Visualizar locais de aplicação"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:textColor="#ffffff"/>
-
-        <Spinner
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cad_id_local"
-            android:tooltipText="Escolha o numero referente ao local"
-            android:spinnerMode="dropdown"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp">
+
+            <Spinner
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_id_local"
+                android:tooltipText="Escolha o numero referente ao local"
+                android:spinnerMode="dropdown"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_btn_locais"
+                android:text="Visualizar locais de aplicação"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

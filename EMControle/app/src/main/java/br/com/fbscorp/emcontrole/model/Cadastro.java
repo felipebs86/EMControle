@@ -1,15 +1,12 @@
 package br.com.fbscorp.emcontrole.model;
 
-import java.security.Timestamp;
-import java.util.Date;
-
 public class Cadastro {
     private long id;
     private String nome;
     private String email;
     private int medicamento;
-    private Date dataInicio;
-    private Timestamp hora;
+    private String data;
+    private String hora;
     private boolean lembrete;
     private int idLocal;
 
@@ -45,19 +42,19 @@ public class Cadastro {
         this.medicamento = medicamento;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public String getData() {
+        return data;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public Timestamp getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Timestamp hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
