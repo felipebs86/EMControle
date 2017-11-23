@@ -46,6 +46,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
     private Medicamento medicamentoSelecionado;
     private Spinner spnLocais;
     private Switch alarme;
+    private String  imgMedicamento = "Avonex";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,11 +168,11 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             dialog.setTitle("Locais de aplicação");
 
             ImageView image = (ImageView) dialog.findViewById(R.id.cad_imagem_local);
-            //if(medicamentoSelecionado.getNome() == "Copaxone"){
-                //image.setImageResource(R.drawable.aplicacao_cpx);
-            //} else if (medicamentoSelecionado.getNome() == "Avonex"){
+            if(medicamentoSelecionado.getNome().equalsIgnoreCase("copaxone")){
+                image.setImageResource(R.drawable.aplicacao_cpx);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("avonex")){
                 image.setImageResource(R.drawable.aplicacao_avx);
-            //}
+            }
 
             FloatingActionButton dialogButton = (FloatingActionButton) dialog.findViewById(R.id.cad_imagem_fechar);
             dialogButton.setOnClickListener(new View.OnClickListener() {
