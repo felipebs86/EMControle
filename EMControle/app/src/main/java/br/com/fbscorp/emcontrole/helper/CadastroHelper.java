@@ -1,5 +1,6 @@
 package br.com.fbscorp.emcontrole.helper;
 
+import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 import br.com.fbscorp.emcontrole.ActivityCadastro;
 import br.com.fbscorp.emcontrole.R;
+import br.com.fbscorp.emcontrole.dao.CadastroDAO;
 import br.com.fbscorp.emcontrole.model.Cadastro;
 
 public class CadastroHelper {
@@ -43,9 +45,33 @@ public class CadastroHelper {
         cadastro.setMedicamento(medicamento.getDropDownVerticalOffset());
         cadastro.setData(txtData.getText().toString());
         cadastro.setHora(txtHora.getText().toString());
-        cadastro.setLembrete(lembrete.isChecked());//capturar booleano dizendo true ouf false
+        if (lembrete.isChecked()){
+            cadastro.setLembrete("true");
+        } else{
+            cadastro.setLembrete("false");
+        }
+        //cadastro.setLembrete(lembrete.isChecked());//capturar booleano dizendo true ouf false
         cadastro.setIdLocal(idLocal.getDropDownVerticalOffset());
         return cadastro;
 
+    }
+
+    public void populaCadastro(Context context){
+        CadastroDAO dao = new CadastroDAO(context);
+        Cadastro cadastro = dao.buscaCadastro();
+        nome.setText(cadastro.getNome());
+        email.setText(cadastro.getEmail());
+        medicamento.setDropDownHorizontalOffset(cadastro.getMedicamento());
+        txtData.setText(cadastro.getData());
+        txtHora.setText(cadastro.getHora());
+        if (cadastro.isLembrete().equalsIgnoreCase("true")){
+            lembrete.setChecked(true);
+        }
+        idLocal.setDropDownVerticalOffset(cadastro.getIdLocal());
+    }
+
+    public boolean existeCadastro(Context context){
+        CadastroDAO dao = new CadastroDAO(context);
+        return dao.existeCadastro();
     }
 }

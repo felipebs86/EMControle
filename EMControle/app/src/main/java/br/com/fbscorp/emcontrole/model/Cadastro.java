@@ -1,13 +1,15 @@
 package br.com.fbscorp.emcontrole.model;
 
-public class Cadastro {
+import java.io.Serializable;
+
+public class Cadastro implements Serializable{
     private long id;
     private String nome;
     private String email;
     private int medicamento;
     private String data;
     private String hora;
-    private boolean lembrete;
+    private String lembrete;
     private int idLocal;
 
     public long getId() {
@@ -58,11 +60,11 @@ public class Cadastro {
         this.hora = hora;
     }
 
-    public boolean isLembrete() {
+    public String isLembrete() {
         return lembrete;
     }
 
-    public void setLembrete(boolean lembrete) {
+    public void setLembrete(String lembrete) {
         this.lembrete = lembrete;
     }
 

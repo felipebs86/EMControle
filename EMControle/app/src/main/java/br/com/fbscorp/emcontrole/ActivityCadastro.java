@@ -55,6 +55,8 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //CadastroDAO cadastroDAO = new CadastroDAO(this);
+
         helper = new CadastroHelper(this);
 
         txtData = (TextView) findViewById(R.id.cad_txt_data);
@@ -87,6 +89,10 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         btnHora.setOnClickListener(this);
         btnImagem.setOnClickListener(this);
 
+        //if(cadastroDAO.existeCadastro()){
+        //    helper.populaCadastro(this);
+        //}
+
     }
 
     private List<Integer> populaLocais(int locais) {
@@ -111,7 +117,12 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             case R.id.menu_cadastro_salvar:
                 Cadastro cadastro = helper.pegaCadastro();
                 CadastroDAO dao = new CadastroDAO(this);
-                dao.insere(cadastro);
+                if (dao.existeCadastro()){
+                    dao.insere(cadastro);
+                } else{
+                    dao.atualiza(cadastro);
+                }
+
                 dao.close();
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
                 //finish();
@@ -205,6 +216,20 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(helper.existeCadastro(this)){
+            helper.populaCadastro(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 }
