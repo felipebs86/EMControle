@@ -21,15 +21,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/init_txt_data"
                 android:text="exemplo1"/>
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:id="@+id/init_img"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:id="@+id/init_txt_hora"
                 android:text="exemplo2"/>
 
         </LinearLayout>

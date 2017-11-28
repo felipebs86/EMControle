@@ -117,12 +117,15 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             case R.id.menu_cadastro_salvar:
                 Cadastro cadastro = helper.pegaCadastro();
                 CadastroDAO dao = new CadastroDAO(this);
+
+                dao.insere(cadastro);
+                /*
                 if (dao.existeCadastro()){
                     dao.insere(cadastro);
                 } else{
                     dao.atualiza(cadastro);
                 }
-
+                */
                 dao.close();
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
                 //finish();
@@ -222,9 +225,9 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onRestart() {
         super.onRestart();
-        if(helper.existeCadastro(this)){
-            helper.populaCadastro(this);
-        }
+        //if(helper.existeCadastro(this)){
+        //    helper.populaCadastro(this);
+        //}
     }
 
     @Override
