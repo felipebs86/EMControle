@@ -17,7 +17,7 @@ public class MedicamentoDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql1 = "create table medicamentos (id integer primary key, nome text, locais integer, frequencia integer);";
+        String sql1 = "create table medicamentos (id integer primary key, nome text not null, locais integer, frequencia integer);";
         String sql2 = "insert into medicamentos (nome, locais, frequencia) values ('Avonex', 4, 7)";
         String sql3 = "insert into medicamentos (nome, locais, frequencia) values ('Copaxone', 30, 1)";
         sqLiteDatabase.execSQL(sql1);
@@ -33,7 +33,7 @@ public class MedicamentoDAO extends SQLiteOpenHelper{
     }
 
     public List<Medicamento> getMedicamentos() {
-        String sql = "select * from medicamentos";
+        String sql = "select * from medicamentos;";
         SQLiteDatabase db = getReadableDatabase();
         List<Medicamento> medicamentos = new ArrayList<Medicamento>();
         Cursor cursor = db.rawQuery(sql, null);

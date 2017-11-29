@@ -16,7 +16,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = "create table cadastro (id integer primary key, nome text, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
+        String sql = "create table cadastro (id integer primary key, nome text not null, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
         sqLiteDatabase.execSQL(sql);
     }
 

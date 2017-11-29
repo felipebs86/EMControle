@@ -33,11 +33,11 @@ public class ActivityInicial extends AppCompatActivity {
         imgLocal = (ImageView) findViewById(R.id.init_img);
         txtHora = (TextView) findViewById(R.id.init_txt_hora);
 
-        CadastroDAO dao = new CadastroDAO(this);
-        Cadastro cadastro = dao.buscaCadastro();
+        //CadastroDAO dao = new CadastroDAO(this);
+        //Cadastro cadastro = dao.buscaCadastro();
 
-        txtData.setText(cadastro.getData());
-        txtHora.setText(cadastro.getHora());
+        //txtData.setText(cadastro.getData());
+        //txtHora.setText(cadastro.getHora());
 
         //medicamento = cadastro.getMedicamento() - gravar nome do medicamento no banco para essa busca
 

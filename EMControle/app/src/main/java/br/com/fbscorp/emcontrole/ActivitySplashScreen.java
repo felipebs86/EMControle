@@ -27,25 +27,22 @@ public class ActivitySplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        MedicamentoDAO medicamentoDAO = new MedicamentoDAO(this);
-        final List<Medicamento> medicamentos = medicamentoDAO.getMedicamentos();
-        CadastroDAO dao = new CadastroDAO(this);
-        cadastro = dao.buscaCadastro();
+        //CadastroDAO dao = new CadastroDAO(this);
+        //cadastro = dao.buscaCadastro();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                vaiParaActivity(cadastro, medicamentos);
+                vaiParaActivity(cadastro);
             }
         }, 2000);
 
     }
 
-    private void vaiParaActivity(Cadastro cadastro, List<Medicamento> medicamentos) {
+    private void vaiParaActivity(Cadastro cadastro) {
         if (cadastro != null){
             Intent intent = new Intent(ActivitySplashScreen.this, ActivityInicial.class);
             intent.putExtra("cadastro", cadastro);
-            intent.putExtra("medicamentos", (Parcelable) medicamentos);
             startActivity(intent);
         } else {
             Intent intent = new Intent(ActivitySplashScreen.this, ActivityCadastro.class);
