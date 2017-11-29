@@ -2,4 +2,8 @@
     <string name="app_name">EMControle</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_inicial">ActivityInicial</string>
+
+    <string name="title_activity_splash_screen">ActivitySplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

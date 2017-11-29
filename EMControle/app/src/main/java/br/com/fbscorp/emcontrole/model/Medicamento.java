@@ -1,6 +1,8 @@
 package br.com.fbscorp.emcontrole.model;
 
-public class Medicamento {
+import java.io.Serializable;
+
+public class Medicamento implements Serializable{
 
     private long id;
     private String nome;

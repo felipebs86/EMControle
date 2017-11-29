@@ -16,7 +16,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = "create table cadastro (id integer primary key, nome text not null, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
+        String sql = "create table cadastro (id integer primary key, nome text, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
         sqLiteDatabase.execSQL(sql);
     }
 
@@ -76,15 +76,18 @@ public class CadastroDAO extends SQLiteOpenHelper{
         String sql = "select * from cadastro where id=1";
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(sql, null);
-        while (c.moveToNext()){
-            cad.setNome(c.getString(c.getColumnIndex("nome")));
-            cad.setEmail(c.getString(c.getColumnIndex("email")));
-            cad.setMedicamento(c.getInt(c.getColumnIndex("medicamento")));
-            cad.setData(c.getString(c.getColumnIndex("data")));
-            cad.setHora(c.getString(c.getColumnIndex("hora")));
-            cad.setLembrete(c.getString(c.getColumnIndex("lembrete")));
-            cad.setIdLocal(c.getInt(c.getColumnIndex("local")));
+        if (c.getCount() != 0) {
+            while (c.moveToNext()) {
+                cad.setNome(c.getString(c.getColumnIndex("nome")));
+                cad.setEmail(c.getString(c.getColumnIndex("email")));
+                cad.setMedicamento(c.getInt(c.getColumnIndex("medicamento")));
+                cad.setData(c.getString(c.getColumnIndex("data")));
+                cad.setHora(c.getString(c.getColumnIndex("hora")));
+                cad.setLembrete(c.getString(c.getColumnIndex("lembrete")));
+                cad.setIdLocal(c.getInt(c.getColumnIndex("local")));
+            }
+            return cad;
         }
-        return cad;
+        return null;
     }
 }
