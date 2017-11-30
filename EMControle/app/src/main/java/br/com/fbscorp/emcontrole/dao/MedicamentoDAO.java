@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,11 @@ public class MedicamentoDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Log.d("EMControle", "Criando tabela de medicamentos");
         String sql1 = "create table medicamentos (id integer primary key, nome text not null, locais integer, frequencia integer);";
         String sql2 = "insert into medicamentos (nome, locais, frequencia) values ('Avonex', 4, 7)";
         String sql3 = "insert into medicamentos (nome, locais, frequencia) values ('Copaxone', 30, 1)";
+        Log.d("EMControle", "Inserindo medicamentos no banco");
         sqLiteDatabase.execSQL(sql1);
         sqLiteDatabase.execSQL(sql2);
         sqLiteDatabase.execSQL(sql3);
@@ -33,8 +36,9 @@ public class MedicamentoDAO extends SQLiteOpenHelper{
     }
 
     public List<Medicamento> getMedicamentos() {
-        String sql = "select * from medicamentos;";
+        Log.d("EMControle", "Buscando medicamentos no banco");
         SQLiteDatabase db = getReadableDatabase();
+        String sql = "select * from medicamentos;";
         List<Medicamento> medicamentos = new ArrayList<Medicamento>();
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()){

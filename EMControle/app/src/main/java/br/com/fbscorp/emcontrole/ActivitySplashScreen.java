@@ -2,11 +2,13 @@ package br.com.fbscorp.emcontrole;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -29,6 +31,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
 
         //CadastroDAO dao = new CadastroDAO(this);
         //cadastro = dao.buscaCadastro();
+        Log.d("EMControle", "Iniciando aplicação");
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -41,10 +44,12 @@ public class ActivitySplashScreen extends AppCompatActivity {
 
     private void vaiParaActivity(Cadastro cadastro) {
         if (cadastro != null){
+            Log.d("EMControle", "Existe cadastro no banco");
             Intent intent = new Intent(ActivitySplashScreen.this, ActivityInicial.class);
             intent.putExtra("cadastro", cadastro);
             startActivity(intent);
         } else {
+            Log.d("EMControle", "Nao existe cadastro no banco");
             Intent intent = new Intent(ActivitySplashScreen.this, ActivityCadastro.class);
             startActivity(intent);
         }

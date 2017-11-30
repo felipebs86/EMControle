@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import br.com.fbscorp.emcontrole.model.Cadastro;
 
@@ -16,6 +17,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Log.d("EMControle", "Criando tabela de cadastro");
         String sql = "create table cadastro (id integer primary key, nome text not null, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
         sqLiteDatabase.execSQL(sql);
     }
@@ -28,6 +30,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
     }
 
     public void insere(Cadastro cadastro) {
+        Log.d("EMControle", "Inserindo cadastro no banco");
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = new ContentValues();
 
@@ -59,8 +62,8 @@ public class CadastroDAO extends SQLiteOpenHelper{
     }
 
     public Boolean existeCadastro(){
-        String sql = "select count(*) from cadastro where id=1";
         SQLiteDatabase db = getReadableDatabase();
+        String sql = "select count(*) from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
         if (c != null) {
             c.moveToFirst();
@@ -72,9 +75,10 @@ public class CadastroDAO extends SQLiteOpenHelper{
     }
 
     public Cadastro buscaCadastro(){
+        Log.d("EMControle", "Buscando cadastro no banco");
+        SQLiteDatabase db = getWritableDatabase();
         Cadastro cad = new Cadastro();
         String sql = "select * from cadastro where id=1";
-        SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(sql, null);
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
