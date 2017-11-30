@@ -74,9 +74,11 @@ public class CadastroDAO extends SQLiteOpenHelper{
     }
 
     public Boolean existeCadastro(){
+        Log.d("EMControle", "Verificando se existe cadastro salvo");
         SQLiteDatabase db = getReadableDatabase();
         String sql = "select count(*) from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
+        Log.d("EMControle", c.toString());
         if (c != null) {
             c.moveToFirst();
             if (c.getInt(0) == 0) {

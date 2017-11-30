@@ -120,14 +120,18 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 Cadastro cadastro = helper.pegaCadastro();
                 CadastroDAO dao = new CadastroDAO(this);
 
-                dao.insere(cadastro);
-                /*
+                Log.d("EMControle", "Botao salvar selecionado");
+                Log.d("EMControle", dao.existeCadastro().toString());
+                //dao.insere(cadastro);
+
                 if (dao.existeCadastro()){
+                    Log.d("EMControle", "Existe cadastro no banco");
                     dao.insere(cadastro);
                 } else{
+                    Log.d("EMControle", "Nao existe cadastro no banco");
                     dao.atualiza(cadastro);
                 }
-                */
+
                 dao.close();
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
                 //finish();
