@@ -19,7 +19,15 @@ public class CadastroDAO extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.d("EMControle", "Criando tabela de cadastro");
         String sql = "create table cadastro (id integer primary key, nome text not null, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
+        Log.d("EMControle", "Criando tabela de medicamentos");
+        String sql1 = "create table medicamentos (id integer primary key, nome text not null, locais integer, frequencia integer);";
+        String sql2 = "insert into medicamentos (nome, locais, frequencia) values ('Avonex', 4, 7)";
+        String sql3 = "insert into medicamentos (nome, locais, frequencia) values ('Copaxone', 30, 1)";
+        Log.d("EMControle", "Inserindo medicamentos no banco");
         sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.execSQL(sql1);
+        sqLiteDatabase.execSQL(sql2);
+        sqLiteDatabase.execSQL(sql3);
     }
 
     @Override
@@ -44,6 +52,10 @@ public class CadastroDAO extends SQLiteOpenHelper{
         dados.put("local", cadastro.getIdLocal());
 
         db.insert("cadastro", null, dados);
+        String sql = "select * from cadastro where id=1";
+        Cursor c = db.rawQuery(sql, null);
+        Log.d("EMControle", "Cursor salvo: " + String.valueOf(c.getCount()));
+        db.close();
     }
 
     public void atualiza(Cadastro cadastro) {
@@ -80,9 +92,11 @@ public class CadastroDAO extends SQLiteOpenHelper{
         Cadastro cad = new Cadastro();
         String sql = "select * from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
+        Log.d("EMControle", "Cursor: " + String.valueOf(c.getCount()));
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
                 cad.setNome(c.getString(c.getColumnIndex("nome")));
+                Log.d("EMControle", cad.getNome());
                 cad.setEmail(c.getString(c.getColumnIndex("email")));
                 cad.setMedicamento(c.getInt(c.getColumnIndex("medicamento")));
                 cad.setData(c.getString(c.getColumnIndex("data")));

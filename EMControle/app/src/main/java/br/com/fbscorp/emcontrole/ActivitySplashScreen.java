@@ -29,8 +29,8 @@ public class ActivitySplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        //CadastroDAO dao = new CadastroDAO(this);
-        //cadastro = dao.buscaCadastro();
+        CadastroDAO dao = new CadastroDAO(this);
+        cadastro = dao.buscaCadastro();
         Log.d("EMControle", "Iniciando aplicação");
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
