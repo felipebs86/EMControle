@@ -52,13 +52,15 @@ public class CadastroDAO extends SQLiteOpenHelper{
         dados.put("local", cadastro.getIdLocal());
 
         db.insert("cadastro", null, dados);
+        db.close();
         String sql = "select * from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
         Log.d("EMControle", "Cursor salvo: " + String.valueOf(c.getCount()));
-        db.close();
+
     }
 
     public void atualiza(Cadastro cadastro) {
+        Log.d("EMControle", "Atualizando cadastro no banco");
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = new ContentValues();
 
@@ -71,6 +73,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         dados.put("local", cadastro.getIdLocal());
 
         db.update("cadastro", dados, "id = 1", null);
+        db.close();
     }
 
     public Boolean existeCadastro(){
@@ -79,7 +82,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         String sql = "select count(*) from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
         Log.d("EMControle", c.toString());
-        if (c != null) {
+        if (c.getCount() == 0) {
             c.moveToFirst();
             if (c.getInt(0) == 0) {
                 return false;

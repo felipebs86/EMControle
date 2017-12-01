@@ -126,10 +126,10 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
                 if (dao.existeCadastro()){
                     Log.d("EMControle", "Existe cadastro no banco");
-                    dao.insere(cadastro);
+                    dao.atualiza(cadastro);
                 } else{
                     Log.d("EMControle", "Nao existe cadastro no banco");
-                    dao.atualiza(cadastro);
+                    dao.insere(cadastro);
                 }
 
                 dao.close();
