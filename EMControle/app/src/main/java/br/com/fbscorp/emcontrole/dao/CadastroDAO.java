@@ -79,14 +79,17 @@ public class CadastroDAO extends SQLiteOpenHelper{
     public Boolean existeCadastro(){
         Log.d("EMControle", "Verificando se existe cadastro salvo");
         SQLiteDatabase db = getReadableDatabase();
-        String sql = "select count(*) from cadastro where id=1";
+        String sql = "select * from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
-        Log.d("EMControle", c.toString());
-        if (c.getCount() == 0) {
-            c.moveToFirst();
-            if (c.getInt(0) == 0) {
-                return false;
+        Log.d("EMControle - " + this.getClass(), String .valueOf(c.getCount()));
+        if (c.getCount() != 0) {
+            while (c.moveToNext()) {
+                Log.d("EMControle", String.valueOf(c.getColumnIndex("id")));
+                Log.d("EMControle", String.valueOf(c.getColumnIndex("nome")));
             }
+        }
+        if (c.getCount() == 0) {
+            return false;
         }
         return true;
     }
@@ -95,11 +98,13 @@ public class CadastroDAO extends SQLiteOpenHelper{
         Log.d("EMControle", "Buscando cadastro no banco");
         SQLiteDatabase db = getWritableDatabase();
         Cadastro cad = new Cadastro();
-        String sql = "select * from cadastro where id=1";
+        String sql = "select * from cadastro";
         Cursor c = db.rawQuery(sql, null);
         Log.d("EMControle", "Cursor: " + String.valueOf(c.getCount()));
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
+                cad.setId(c.getInt(c.getColumnIndex("id")));
+                Log.d("EMControle", String.valueOf(cad.getId()));
                 cad.setNome(c.getString(c.getColumnIndex("nome")));
                 Log.d("EMControle", cad.getNome());
                 cad.setEmail(c.getString(c.getColumnIndex("email")));
