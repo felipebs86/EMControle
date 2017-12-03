@@ -3,6 +3,7 @@ package br.com.fbscorp.emcontrole;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ import br.com.fbscorp.emcontrole.model.Medicamento;
 
 public class ActivityCadastro extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener{
 
+    private Cadastro cadastro;
     private CadastroHelper helper;
     private TextView txtData, txtHora;
     private Button btnData;
@@ -48,6 +50,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
     private Spinner spnLocais;
     private Switch alarme;
     private String  imgMedicamento = "Avonex";
+    private boolean isCadastrado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,6 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_cadastro);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //CadastroDAO cadastroDAO = new CadastroDAO(this);
 
         helper = new CadastroHelper(this);
 
@@ -69,7 +70,6 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         spnMedicamentos = (Spinner) findViewById(R.id.cad_medicamento);
         spnLocais = (Spinner) findViewById(R.id.cad_id_local);
         alarme = (Switch) findViewById(R.id.cad_lembrete);
-
 
         MedicamentoDAO dao = new MedicamentoDAO(this);
         List<Medicamento> medicamentos = dao.getMedicamentos();
@@ -91,10 +91,16 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         btnHora.setOnClickListener(this);
         btnImagem.setOnClickListener(this);
 
-        //if(cadastroDAO.existeCadastro()){
-        //    helper.populaCadastro(this);
-        //}
 
+        CadastroDAO cadastroDAO = new CadastroDAO(this);
+        isCadastrado = cadastroDAO.existeCadastro();
+        if (isCadastrado == true) {
+            //Log.d("EMControle", "Veio dados na intent: " + dados.toString());
+            //cadastro = (Cadastro) dados.get("cad");
+            //Log.d("EMControle", String.valueOf(cadastro));
+            cadastro = cadastroDAO.buscaCadastro();
+            helper.populaCadastro(this);
+        }
     }
 
     private List<Integer> populaLocais(int locais) {
@@ -134,7 +140,9 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
                 dao.close();
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
-                //finish();
+                Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
+                intent1.putExtra("cadastro", cadastro);
+                startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -203,7 +211,6 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             });
             dialog.show();
         }
-
     }
 
     @Override
@@ -215,6 +222,16 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 ArrayAdapter<Integer> spinnerLocaisArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, locais);
                 spinnerLocaisArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 spnLocais.setAdapter(spinnerLocaisArrayAdapter);
+
+                if (isCadastrado == true) {
+                    if (cadastro.getIdLocal() <= 3 ) {
+                        Log.d("EMControle", String.valueOf(spnMedicamentos.getSelectedItemPosition()));
+                        spnLocais.setSelection(cadastro.getIdLocal());
+                    } else if (spnMedicamentos.getSelectedItemPosition() == 1) {
+                        Log.d("EMControle", String.valueOf(spnMedicamentos.getSelectedItemPosition()));
+                        spnLocais.setSelection(cadastro.getIdLocal());
+                    }
+                }
 
                 break;
 
@@ -229,16 +246,8 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        //if(helper.existeCadastro(this)){
-        //    helper.populaCadastro(this);
-        //}
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

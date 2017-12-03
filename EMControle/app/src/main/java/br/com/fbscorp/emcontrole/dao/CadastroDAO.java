@@ -52,11 +52,11 @@ public class CadastroDAO extends SQLiteOpenHelper{
         dados.put("local", cadastro.getIdLocal());
 
         db.insert("cadastro", null, dados);
-        db.close();
+
         String sql = "select * from cadastro where id=1";
         Cursor c = db.rawQuery(sql, null);
         Log.d("EMControle", "Cursor salvo: " + String.valueOf(c.getCount()));
-
+        db.close();
     }
 
     public void atualiza(Cadastro cadastro) {
@@ -110,7 +110,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
                 cad.setEmail(c.getString(c.getColumnIndex("email")));
                 cad.setMedicamento(c.getInt(c.getColumnIndex("medicamento")));
                 cad.setData(c.getString(c.getColumnIndex("data")));
-                cad.setHora(c.getString(c.getColumnIndex("hora")));
+                cad.setHora(c.getString(c.getColumnIndex("horario")));
                 cad.setLembrete(c.getString(c.getColumnIndex("lembrete")));
                 cad.setIdLocal(c.getInt(c.getColumnIndex("local")));
             }

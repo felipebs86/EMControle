@@ -1,6 +1,7 @@
 package br.com.fbscorp.emcontrole.helper;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,6 +15,7 @@ import br.com.fbscorp.emcontrole.ActivityCadastro;
 import br.com.fbscorp.emcontrole.R;
 import br.com.fbscorp.emcontrole.dao.CadastroDAO;
 import br.com.fbscorp.emcontrole.model.Cadastro;
+import br.com.fbscorp.emcontrole.model.Medicamento;
 
 public class CadastroHelper {
     private final EditText nome;
@@ -42,7 +44,10 @@ public class CadastroHelper {
         Cadastro cadastro = new Cadastro();
         cadastro.setNome(nome.getText().toString());
         cadastro.setEmail(email.getText().toString());
-        cadastro.setMedicamento(medicamento.getDropDownVerticalOffset());
+        Medicamento med  = (Medicamento) medicamento.getSelectedItem();
+        Log.d("EMControle - " + this.getClass(), med.getNome());
+        cadastro.setMedicamento(medicamento.getSelectedItemPosition());
+        Log.d("EMControle - " + this.getClass(), String.valueOf(medicamento.getSelectedItemPosition()));
         cadastro.setData(txtData.getText().toString());
         cadastro.setHora(txtHora.getText().toString());
         if (lembrete.isChecked()){
@@ -50,8 +55,8 @@ public class CadastroHelper {
         } else{
             cadastro.setLembrete("false");
         }
-        //cadastro.setLembrete(lembrete.isChecked());//capturar booleano dizendo true ouf false
-        cadastro.setIdLocal(idLocal.getDropDownVerticalOffset());
+        cadastro.setIdLocal(idLocal.getSelectedItemPosition());
+        Log.d("EMControle - " + this.getClass(), String.valueOf(idLocal.getSelectedItemPosition()));
         return cadastro;
 
     }
@@ -61,13 +66,13 @@ public class CadastroHelper {
         Cadastro cadastro = dao.buscaCadastro();
         nome.setText(cadastro.getNome());
         email.setText(cadastro.getEmail());
-        medicamento.setDropDownHorizontalOffset(cadastro.getMedicamento());
+        medicamento.setSelection(cadastro.getMedicamento());
         txtData.setText(cadastro.getData());
         txtHora.setText(cadastro.getHora());
         if (cadastro.isLembrete().equalsIgnoreCase("true")){
             lembrete.setChecked(true);
         }
-        idLocal.setDropDownVerticalOffset(cadastro.getIdLocal());
+        idLocal.setSelection(cadastro.getIdLocal());
     }
 
     public boolean existeCadastro(Context context){
