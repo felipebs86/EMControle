@@ -1,10 +1,13 @@
 package br.com.fbscorp.emcontrole;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -73,8 +76,8 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
         MedicamentoDAO dao = new MedicamentoDAO(this);
         List<Medicamento> medicamentos = dao.getMedicamentos();
-        ArrayAdapter<Medicamento> spinnerArrayAdapter = new ArrayAdapter<Medicamento>(this, android.R.layout.simple_spinner_dropdown_item, medicamentos);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        ArrayAdapter<Medicamento> spinnerArrayAdapter = new ArrayAdapter<Medicamento>(this, R.layout.emcontrole_spinner_dropdown_item, medicamentos);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.emcontrole_spinner_item);
         spnMedicamentos.setAdapter(spinnerArrayAdapter);
         spnMedicamentos.setOnItemSelectedListener(this);
 
@@ -139,6 +142,29 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 }
 
                 dao.close();
+
+                if (alarme.isChecked()) {
+                    boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+
+                    if(alarmeAtivo){
+                        Log.i("EMControle", "Novo alarme");
+
+                        Intent intent = new Intent("ALARME_DISPARADO");
+                        PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+                        Calendar c = Calendar.getInstance();
+                        c.setTimeInMillis(System.currentTimeMillis());
+                        c.add(Calendar.SECOND, 3);
+
+                        AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
+                    }
+                    else{
+                        Log.i("EMControle", "Alarme ja ativo");
+                    }
+                }
+
+
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
                 intent1.putExtra("cadastro", cadastro);
@@ -219,8 +245,8 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             case R.id.cad_medicamento:
                 medicamentoSelecionado = (Medicamento) spnMedicamentos.getSelectedItem();
                 List<Integer> locais = populaLocais(medicamentoSelecionado.getLocais());
-                ArrayAdapter<Integer> spinnerLocaisArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, locais);
-                spinnerLocaisArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                ArrayAdapter<Integer> spinnerLocaisArrayAdapter = new ArrayAdapter<Integer>(this, R.layout.emcontrole_spinner_dropdown_item, locais);
+                spinnerLocaisArrayAdapter.setDropDownViewResource(R.layout.emcontrole_spinner_item);
                 spnLocais.setAdapter(spinnerLocaisArrayAdapter);
 
                 if (isCadastrado == true) {
