@@ -10,30 +10,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="800dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:id="@+id/init_txt_data"
                 android:text="exemplo1"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/init_img"/>
+                android:layout_width="200dp"
+                android:layout_height="250dp"
+                android:id="@+id/init_img"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/init_txt_hora"
-                android:text="exemplo2"/>
+                android:text="exemplo2"
+                android:layout_weight="2"/>
 
         </LinearLayout>
         <ListView
@@ -44,7 +45,21 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/teste"/>
+            android:id="@+id/teste"
+            android:text="Configurações"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_lista_diario"
+            android:text="Diario"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_lista_links"
+            android:text="Links úteis"/>
+
     </LinearLayout>
 
 </ScrollView>

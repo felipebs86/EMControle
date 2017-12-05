@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:id="@+id/cad_medicamento"
             android:tooltipText="Selecione o medicamento utilizado" />
 
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/cad_id_local"
                 android:tooltipText="Escolha o numero referente ao local"
-                android:spinnerMode="dropdown"
+                android:spinnerMode="dialog"
                 />
 
             <Button

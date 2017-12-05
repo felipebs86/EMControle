@@ -22,7 +22,7 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i("EMControle", "Alarme");
 
-        gerarNotificacao(context, new Intent(context, ActivityInicial.class), "Alarme medicamento!", "EMControle", "Prepare-se para a aplicação do medicamento");
+        gerarNotificacao(context, new Intent(context, ActivitySplashScreen.class), "Alarme medicamento!", "EMControle", "Prepare-se para a aplicação \ndo medicamento");
     }
 
     public void gerarNotificacao(Context context, Intent intent, CharSequence ticker, CharSequence titulo, CharSequence descricao){

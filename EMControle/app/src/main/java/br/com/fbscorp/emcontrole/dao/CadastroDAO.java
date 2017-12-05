@@ -21,13 +21,35 @@ public class CadastroDAO extends SQLiteOpenHelper{
         String sql = "create table cadastro (id integer primary key, nome text not null, email text, medicamento integer, data text, horario text, lembrete text, local integer);";
         Log.d("EMControle", "Criando tabela de medicamentos");
         String sql1 = "create table medicamentos (id integer primary key, nome text not null, locais integer, frequencia integer);";
+        Log.d("EMControle", "Inserindo medicamentos no banco");
         String sql2 = "insert into medicamentos (nome, locais, frequencia) values ('Avonex', 4, 7)";
         String sql3 = "insert into medicamentos (nome, locais, frequencia) values ('Copaxone', 30, 1)";
-        Log.d("EMControle", "Inserindo medicamentos no banco");
+        Log.d("EMControle", "Criando tabela diario");
+        String sql4 = "create table diario (id integer primary key, data text not null, hora text, texto text);";
+        Log.d("EMControle", "Criando tabela links");
+        String sql5 = "create table links (id integer primary key, titulo text not null, url text);";
+        Log.d("EMControle", "Inserindo links no banco");
+        String sql6 = "insert into links (titulo, url) values ('Amigos Multiplos (AME)', 'http://www.amigosmultiplos.org.br/')";
+        String sql7 = "insert into links (titulo, url) values ('Esclerose Mulipla e Eu', 'http://esclerosemultiplaeeu.blogspot.com.br/')";
+        String sql8 = "insert into links (titulo, url) values ('APEMERJ', 'http://apemerj.org.br/site/')";
+        String sql9 = "insert into links (titulo, url) values ('AGAPEM', 'http://www.agapem.org.br/portal/')";
+        String sql10 = "insert into links (titulo, url) values ('Esclerose Multipla', 'http://esclerosemultipla.com.br')";
+        String sql11 = "insert into links (titulo, url) values ('Esclarecimento Multiplo', 'https://www.esclarecimentomultiplo.com.br')";
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.execSQL(sql1);
         sqLiteDatabase.execSQL(sql2);
         sqLiteDatabase.execSQL(sql3);
+        sqLiteDatabase.execSQL(sql4);
+        sqLiteDatabase.execSQL(sql5);
+        sqLiteDatabase.execSQL(sql6);
+        sqLiteDatabase.execSQL(sql7);
+        sqLiteDatabase.execSQL(sql8);
+        sqLiteDatabase.execSQL(sql9);
+        sqLiteDatabase.execSQL(sql10);
+        sqLiteDatabase.execSQL(sql11);
+        String sqlteste = "insert into diario (data, hora, texto) values ('01/01', '12:00', 'TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO ')";
+        sqLiteDatabase.execSQL(sqlteste);
+
     }
 
     @Override

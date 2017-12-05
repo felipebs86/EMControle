@@ -6,4 +6,7 @@
     <string name="title_activity_splash_screen">ActivitySplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_diario">ActivityDiario</string>
+    <string name="title_activity_conteudo_diario">ActivityConteudoDiario</string>
+    <string name="title_activity_links">ActivityLinks</string>
 </resources>

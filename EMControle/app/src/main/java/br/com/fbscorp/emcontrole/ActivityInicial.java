@@ -41,6 +41,9 @@ public class ActivityInicial extends AppCompatActivity {
         imgLocal = (ImageView) findViewById(R.id.init_img);
         txtHora = (TextView) findViewById(R.id.init_txt_hora);
         Button bt = (Button) findViewById(R.id.teste);
+        Button btnDiario = (Button) findViewById(R.id.btn_lista_diario);
+        Button btnLinks = (Button) findViewById(R.id.btn_lista_links);
+
 
         Intent intent = getIntent();
         Bundle dados = intent.getExtras();
@@ -96,11 +99,22 @@ public class ActivityInicial extends AppCompatActivity {
             }
         });
 
+        btnDiario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ActivityInicial.this, ActivityDiario.class);
+                startActivity(intent1);
+            }
+        });
+
+        btnLinks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ActivityInicial.this, ActivityLinks.class);
+                startActivity(intent1);
+            }
+        });
+
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        finish();
-    }
 }

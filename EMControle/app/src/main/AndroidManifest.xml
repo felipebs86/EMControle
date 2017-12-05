@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.fbscorp.emcontrole">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +14,7 @@
         <activity
             android:name=".ActivityCadastro"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityInicial"
             android:label="@string/title_activity_inicial"
@@ -26,16 +24,33 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <receiver android:name="BroadcastReceiverAux" android:label="BroadcastReceiverAux">
+        <receiver
+            android:name=".BroadcastReceiverAux"
+            android:label="BroadcastReceiverAux">
             <intent-filter>
-                <action android:name="ALARME_DISPARADO"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="ALARME_DISPARADO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".ActivityDiario"
+            android:label="@string/title_activity_diario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityConteudoDiario"
+            android:label="@string/title_activity_conteudo_diario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityLinks"
+            android:label="@string/title_activity_links"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
