@@ -1,5 +1,7 @@
 package br.com.fbscorp.emcontrole;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 import br.com.fbscorp.emcontrole.dao.CadastroDAO;
 import br.com.fbscorp.emcontrole.helper.CadastroHelper;
@@ -44,6 +48,28 @@ public class ActivityInicial extends AppCompatActivity {
         cadastro = (Cadastro) dados.get("cadastro");
 
         Log.d("EMControle", cadastro.getNome());
+
+        if (cadastro.isLembrete().equalsIgnoreCase("true")) {
+
+            boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+
+            if(alarmeAtivo){
+                Log.i("EMControle", "Novo alarme");
+
+                Intent intent1 = new Intent("ALARME_DISPARADO");
+                PendingIntent p = PendingIntent.getBroadcast(this, 0, intent1, 0);
+
+                Calendar c = Calendar.getInstance();
+                c.setTimeInMillis(System.currentTimeMillis());
+                c.add(Calendar.SECOND, 3);
+
+                AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
+            }
+            else{
+                Log.i("EMControle", "Alarme ja ativo");
+            }
+        }
 
 
 

@@ -143,26 +143,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
                 dao.close();
 
-                if (alarme.isChecked()) {
-                    boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
 
-                    if(alarmeAtivo){
-                        Log.i("EMControle", "Novo alarme");
-
-                        Intent intent = new Intent("ALARME_DISPARADO");
-                        PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
-
-                        Calendar c = Calendar.getInstance();
-                        c.setTimeInMillis(System.currentTimeMillis());
-                        c.add(Calendar.SECOND, 3);
-
-                        AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
-                    }
-                    else{
-                        Log.i("EMControle", "Alarme ja ativo");
-                    }
-                }
 
 
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
