@@ -143,9 +143,6 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
                 dao.close();
 
-
-
-
                 Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
                 intent1.putExtra("cadastro", cadastro);
@@ -169,7 +166,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                            txtData.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            txtData.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year));
                         }
                     }, ano, mes, dia);
 
@@ -189,7 +186,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
-                            txtHora.setText(hourOfDay + ":" + minute);
+                            txtHora.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
                         }
                     }, hora, minuto, false);
 

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.com.fbscorp.emcontrole.ActivityInicial"
-    tools:showIn="@layout/activity_inicial">
+    tools:showIn="@layout/activity_inicial"
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,26 +16,80 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:id="@+id/init_txt_data"
-                android:text="exemplo1"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data da próxima aplicação: "
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/init_txt_data"
+                    android:text="exemplo1"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hora da próxima aplicação: "
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/init_txt_hora"
+                    android:text="exemplo1"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Local da próxima aplicação: "
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/init_txt_local"
+                    android:text="exemplo1"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="250dp"
                 android:id="@+id/init_img"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/init_txt_hora"
-                android:text="exemplo2"
-                android:layout_weight="2"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="3dp"/>
 
         </LinearLayout>
         <ListView
@@ -46,19 +101,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/teste"
-            android:text="Configurações"/>
+            android:text="Configurações"
+            android:background="@drawable/botao_emcontrole"
+            android:textColor="#ffffff"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/btn_lista_diario"
-            android:text="Diario"/>
+            android:text="Diario"
+            android:background="@drawable/botao_emcontrole"
+            android:textColor="#ffffff"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/btn_lista_links"
-            android:text="Links úteis"/>
+            android:text="Links úteis"
+            android:background="@drawable/botao_emcontrole"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 

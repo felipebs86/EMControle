@@ -1,7 +1,9 @@
 package br.com.fbscorp.emcontrole;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +18,10 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import br.com.fbscorp.emcontrole.dao.CadastroDAO;
 import br.com.fbscorp.emcontrole.helper.CadastroHelper;
@@ -25,7 +30,7 @@ import br.com.fbscorp.emcontrole.model.Medicamento;
 
 public class ActivityInicial extends AppCompatActivity {
 
-    private TextView txtData, txtHora;
+    private TextView txtData, txtHora, txtLocal;
     private ImageView imgLocal;
     private String medicamento = "person";
     private Cadastro cadastro;
@@ -37,9 +42,13 @@ public class ActivityInicial extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Log.d("EMControle " + this.getLocalClassName(), "Iniciando activity inicial");
 
+        NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        nMgr.cancelAll();
+
         txtData = (TextView) findViewById(R.id.init_txt_data);
         imgLocal = (ImageView) findViewById(R.id.init_img);
         txtHora = (TextView) findViewById(R.id.init_txt_hora);
+        txtLocal = (TextView) findViewById(R.id.init_txt_local);
         Button bt = (Button) findViewById(R.id.teste);
         Button btnDiario = (Button) findViewById(R.id.btn_lista_diario);
         Button btnLinks = (Button) findViewById(R.id.btn_lista_links);
@@ -59,7 +68,7 @@ public class ActivityInicial extends AppCompatActivity {
             if(alarmeAtivo){
                 Log.i("EMControle", "Novo alarme");
 
-                Intent intent1 = new Intent("ALARME_DISPARADO");
+                Intent intent1 = new Intent("ALARME_DISPARADO").putExtra("cadastro", cadastro);
                 PendingIntent p = PendingIntent.getBroadcast(this, 0, intent1, 0);
 
                 Calendar c = Calendar.getInstance();
@@ -74,15 +83,9 @@ public class ActivityInicial extends AppCompatActivity {
             }
         }
 
-
-
-        //CadastroDAO dao = new CadastroDAO(this);
-        //Cadastro cadastro = dao.buscaCadastro();
-
         txtData.setText(cadastro.getData());
         txtHora.setText(cadastro.getHora());
-
-        //medicamento = cadastro.getMedicamento() //- gravar nome do medicamento no banco para essa busca
+        //txtLocal.setText(cadastro.getIdLocal());
 
         if (cadastro.getMedicamento() == 0){
             imgLocal.setImageResource(R.drawable.aplicacao_avx);
@@ -114,6 +117,8 @@ public class ActivityInicial extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+
 
     }
 
