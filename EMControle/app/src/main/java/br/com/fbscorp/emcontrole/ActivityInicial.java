@@ -69,9 +69,9 @@ public class ActivityInicial extends AppCompatActivity {
 
         if (cadastro.isLembrete().equalsIgnoreCase("true")) {
 
-            boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+            //boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
 
-            if(alarmeAtivo){
+            //if(alarmeAtivo){
                 Log.i("EMControle", "Novo alarme");
 
                 Intent intent1 = new Intent("ALARME_DISPARADO").putExtra("cadastro", cadastro);
@@ -87,7 +87,7 @@ public class ActivityInicial extends AppCompatActivity {
             else{
                 Log.i("EMControle", "Alarme ja ativo");
             }
-        }
+        //}
 
         txtData.setText(cadastro.getData());
         txtHora.setText(cadastro.getHora());
