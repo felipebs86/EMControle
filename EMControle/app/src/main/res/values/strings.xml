@@ -9,4 +9,6 @@
     <string name="title_activity_diario">ActivityDiario</string>
     <string name="title_activity_conteudo_diario">ActivityConteudoDiario</string>
     <string name="title_activity_links">ActivityLinks</string>
+    <string name="title_activity_conteudo_diario_visualizacao">ActivityConteudoDiarioVisualizacao
+    </string>
 </resources>

@@ -94,8 +94,8 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="200dp"
-                android:layout_height="250dp"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/init_img"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -110,10 +110,11 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/teste"
-            android:text="Configurações"
+            android:id="@+id/registrar"
+            android:text="Registrar aplicação"
             android:background="@drawable/botao_emcontrole"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff"
+            android:layout_marginBottom="20dp"/>
 
         <Button
             android:layout_width="match_parent"
@@ -128,6 +129,14 @@
             android:layout_height="match_parent"
             android:id="@+id/btn_lista_links"
             android:text="Links úteis"
+            android:background="@drawable/botao_emcontrole"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/teste"
+            android:text="Configurações"
             android:background="@drawable/botao_emcontrole"
             android:textColor="#ffffff"/>
 

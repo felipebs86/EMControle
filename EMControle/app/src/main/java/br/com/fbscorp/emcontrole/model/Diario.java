@@ -46,6 +46,6 @@ public class Diario implements Serializable {
 
     @Override
     public String toString() {
-        return this.getData() + " - " + this.getHora() ;
+        return this.getData();
     }
 }

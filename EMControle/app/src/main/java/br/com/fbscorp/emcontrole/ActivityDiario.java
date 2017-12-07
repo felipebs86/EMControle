@@ -49,7 +49,7 @@ public class ActivityDiario extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int posicao, long id) {
                 Diario diario = (Diario) listaDiarios.getItemAtPosition(posicao);
-                Intent intent = new Intent(ActivityDiario.this, ActivityConteudoDiario.class);
+                Intent intent = new Intent(ActivityDiario.this, ActivityConteudoDiarioVisualizacao.class);
                 intent.putExtra("diario", diario);
                 startActivity(intent);
             }

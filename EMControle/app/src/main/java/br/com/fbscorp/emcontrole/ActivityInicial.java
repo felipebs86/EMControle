@@ -36,6 +36,7 @@ public class ActivityInicial extends AppCompatActivity {
     private String medicamento = "person";
     private Cadastro cadastro;
     private TextView txtSaudacao;
+    private Calendar c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class ActivityInicial extends AppCompatActivity {
         setContentView(R.layout.activity_inicial);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //final Calendar c = Calendar.getInstance();
         Log.d("EMControle " + this.getLocalClassName(), "Iniciando activity inicial");
 
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -56,6 +58,7 @@ public class ActivityInicial extends AppCompatActivity {
         Button bt = (Button) findViewById(R.id.teste);
         Button btnDiario = (Button) findViewById(R.id.btn_lista_diario);
         Button btnLinks = (Button) findViewById(R.id.btn_lista_links);
+        Button btnRegistrar = (Button) findViewById(R.id.registrar);
 
 
         Intent intent = getIntent();
@@ -77,7 +80,7 @@ public class ActivityInicial extends AppCompatActivity {
                 Intent intent1 = new Intent("ALARME_DISPARADO").putExtra("cadastro", cadastro);
                 PendingIntent p = PendingIntent.getBroadcast(this, 0, intent1, 0);
 
-                Calendar c = Calendar.getInstance();
+                c = Calendar.getInstance();
                 c.setTimeInMillis(System.currentTimeMillis());
                 c.add(Calendar.SECOND, 3);
 
@@ -130,6 +133,7 @@ public class ActivityInicial extends AppCompatActivity {
                 Intent intent1 = new Intent(ActivityInicial.this, ActivityCadastro.class);
                 intent1.putExtra("cad", cadastro);
                 startActivity(intent1);
+                finish();
             }
         });
 
@@ -149,8 +153,50 @@ public class ActivityInicial extends AppCompatActivity {
             }
         });
 
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String novaData = cadastro.getData();
 
+                if (cadastro.getMedicamento() == 0) {
+                    c.add(Calendar.DAY_OF_MONTH, 7);
+                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+                    if (cadastro.getIdLocal() < 4) {
+                        cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+                    } else {
+                        cadastro.setIdLocal(1);
+                    }
+                } else if (cadastro.getMedicamento() == 1) {
+                    c.add(Calendar.DAY_OF_MONTH, 1);
+                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+                    if (cadastro.getIdLocal() < 30) {
+                        cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+                    } else {
+                        cadastro.setIdLocal(1);
+                    }
+                }
 
+                cadastro.setData(novaData);
+
+                CadastroDAO dao = new CadastroDAO(ActivityInicial.this);
+
+                dao.atualiza(cadastro);
+
+                Log.d("EMControle", "Nova Data: " + novaData);
+                Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
+
+                onRestart();
+            }
+        });
+
+    }
+
+    private String formata(int numero) {
+        String numeroFormatado = String.valueOf(numero);
+        if (numero < 10) {
+            numeroFormatado =  '0' + numeroFormatado;
+        }
+        return numeroFormatado;
     }
 
 }

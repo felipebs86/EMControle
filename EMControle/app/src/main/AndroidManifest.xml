@@ -3,7 +3,7 @@
     package="br.com.fbscorp.emcontrole">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -53,6 +53,10 @@
         <activity
             android:name=".ActivityLinks"
             android:label="Links Úteis"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityConteudoDiarioVisualizacao"
+            android:label="Diario"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

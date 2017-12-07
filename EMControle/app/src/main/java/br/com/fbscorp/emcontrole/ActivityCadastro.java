@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -169,6 +171,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         return valido;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View view) {
         if (view == btnData){
@@ -177,7 +180,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             mes = c.get(Calendar.MONTH);
             dia = c.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.TimePickerTheme,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -197,7 +200,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             hora = c.get(Calendar.HOUR_OF_DAY);
             minuto = c.get(Calendar.MINUTE);
 
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.TimePickerTheme,
                     new TimePickerDialog.OnTimeSetListener() {
 
                         @Override

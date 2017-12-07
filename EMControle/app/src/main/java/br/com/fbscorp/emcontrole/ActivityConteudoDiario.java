@@ -49,12 +49,21 @@ public class ActivityConteudoDiario extends AppCompatActivity {
         if (dados != null) {
             Diario diario = (Diario) dados.get("diario");
 
-            txtCabecalho.setText(diario.getData() + "--" + diario.getHora());
+            txtCabecalho.setText(diario.getData());
             txtTexto.setText(diario.getTexto());
         }
 
         Calendar c  = Calendar.getInstance();
-        txtCabecalho.setText(c.getTime().toString());
+
+
+        txtCabecalho.setText( "Diario do dia "
+                + String.valueOf(c.get(c.DAY_OF_MONTH))
+                + "/" + String.valueOf(c.get(c.MONTH)+1)
+                + "/" + String.valueOf(c.get(c.YEAR))
+                + " as "
+                + String.valueOf(c.get(c.HOUR_OF_DAY))
+                + ":"
+                + String.valueOf(c.get(c.MINUTE)));
 
 
     }

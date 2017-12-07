@@ -134,7 +134,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
                 cad.setData(c.getString(c.getColumnIndex("data")));
                 cad.setHora(c.getString(c.getColumnIndex("horario")));
                 cad.setLembrete(c.getString(c.getColumnIndex("lembrete")));
-                cad.setIdLocal(c.getInt(c.getColumnIndex("local") + 1));
+                cad.setIdLocal(c.getInt(c.getColumnIndex("local"))+1);
             }
             return cad;
         }
