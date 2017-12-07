@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fbscorp.emcontrole.model.Diario;
 import br.com.fbscorp.emcontrole.model.Link;
 
 /**
@@ -50,4 +51,9 @@ public class LinksDAO extends SQLiteOpenHelper {
         return links;
     }
 
+    public void exclui(Diario diario) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {String.valueOf(diario.getId())};
+        db.delete("diario", "id = ?", params);
+    }
 }

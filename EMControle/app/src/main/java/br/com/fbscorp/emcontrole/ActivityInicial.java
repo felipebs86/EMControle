@@ -1,6 +1,7 @@
 package br.com.fbscorp.emcontrole;
 
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -34,6 +35,8 @@ public class ActivityInicial extends AppCompatActivity {
     private ImageView imgLocal;
     private String medicamento = "person";
     private Cadastro cadastro;
+    private TextView txtSaudacao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class ActivityInicial extends AppCompatActivity {
         imgLocal = (ImageView) findViewById(R.id.init_img);
         txtHora = (TextView) findViewById(R.id.init_txt_hora);
         txtLocal = (TextView) findViewById(R.id.init_txt_local);
+        txtSaudacao = (TextView) findViewById(R.id.ini_saudacao);
         Button bt = (Button) findViewById(R.id.teste);
         Button btnDiario = (Button) findViewById(R.id.btn_lista_diario);
         Button btnLinks = (Button) findViewById(R.id.btn_lista_links);
@@ -58,6 +62,8 @@ public class ActivityInicial extends AppCompatActivity {
         Bundle dados = intent.getExtras();
 
         cadastro = (Cadastro) dados.get("cadastro");
+
+        txtSaudacao.setText("Olá " + cadastro.getNome() + "!");
 
         Log.d("EMControle", cadastro.getNome());
 
@@ -85,13 +91,38 @@ public class ActivityInicial extends AppCompatActivity {
 
         txtData.setText(cadastro.getData());
         txtHora.setText(cadastro.getHora());
-        //txtLocal.setText(cadastro.getIdLocal());
+        txtLocal.setText(String.valueOf(cadastro.getIdLocal()));
 
         if (cadastro.getMedicamento() == 0){
             imgLocal.setImageResource(R.drawable.aplicacao_avx);
         } else if (cadastro.getMedicamento() == 1){
             imgLocal.setImageResource(R.drawable.aplicacao_cpx);
         }
+
+        imgLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ActivityInicial.this);
+                dialog.setContentView(R.layout.imagem_local);
+                dialog.setTitle("Locais de aplicação");
+
+                ImageView image = (ImageView) dialog.findViewById(R.id.cad_imagem_local);
+                if(cadastro.getMedicamento() == 0){
+                    image.setImageResource(R.drawable.aplicacao_avx);
+                } else if (cadastro.getMedicamento() == 1){
+                    image.setImageResource(R.drawable.aplicacao_cpx);
+                }
+
+                FloatingActionButton dialogButton = (FloatingActionButton) dialog.findViewById(R.id.cad_imagem_fechar);
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         bt.setOnClickListener(new View.OnClickListener() {
             @Override

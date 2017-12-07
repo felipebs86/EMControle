@@ -6,13 +6,28 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Calendar;
+
+import br.com.fbscorp.emcontrole.dao.CadastroDAO;
+import br.com.fbscorp.emcontrole.dao.DiarioDAO;
+import br.com.fbscorp.emcontrole.helper.DiarioHelper;
 import br.com.fbscorp.emcontrole.model.Cadastro;
 import br.com.fbscorp.emcontrole.model.Diario;
 
 public class ActivityConteudoDiario extends AppCompatActivity {
+
+    private DiarioHelper helper;
+    private TextView txtCabecalho;
+    private EditText txtTexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +39,48 @@ public class ActivityConteudoDiario extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle dados = intent.getExtras();
 
-        Diario diario = (Diario) dados.get("diario");
+        txtCabecalho = (TextView) findViewById(R.id.cabecalho_diario);
+        txtTexto = (EditText) findViewById(R.id.conteudo_diario);
 
-        TextView txtCabecalho = (TextView) findViewById(R.id.cabecalho_diario);
-        TextView txtTexto = (TextView) findViewById(R.id.conteudo_diario);
+        helper = new DiarioHelper(this);
 
 
-        //txtCabecalho.setText(diario.getData() + "--" + diario.getHora());
-        //txtTexto.setText(diario.getTexto());
+
+        if (dados != null) {
+            Diario diario = (Diario) dados.get("diario");
+
+            txtCabecalho.setText(diario.getData() + "--" + diario.getHora());
+            txtTexto.setText(diario.getTexto());
+        }
+
+        Calendar c  = Calendar.getInstance();
+        txtCabecalho.setText(c.getTime().toString());
+
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater =  getMenuInflater();
+        inflater.inflate(R.menu.menu_activity_diario, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_diario_salvar:
+                DiarioDAO dao = new DiarioDAO(ActivityConteudoDiario.this);
+                Diario diario = helper.pegaDiario();
+
+                if (dao.existeDiario(diario)) {
+                    dao.atualiza(diario);
+                } else{
+                    dao.insere(diario);
+                }
+                finish();
+            break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

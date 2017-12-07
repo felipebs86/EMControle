@@ -1,13 +1,10 @@
 package br.com.fbscorp.emcontrole;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,6 +51,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
     private Switch alarme;
     private String  imgMedicamento = "Avonex";
     private boolean isCadastrado;
+    private TextView txtNome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +63,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
         helper = new CadastroHelper(this);
 
+        txtNome = (TextView) findViewById(R.id.cad_nome);
         txtData = (TextView) findViewById(R.id.cad_txt_data);
         txtHora = (TextView) findViewById(R.id.cad_txt_hora);
         btnData = (Button) findViewById(R.id.cad_btn_data);
@@ -98,9 +97,6 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         CadastroDAO cadastroDAO = new CadastroDAO(this);
         isCadastrado = cadastroDAO.existeCadastro();
         if (isCadastrado == true) {
-            //Log.d("EMControle", "Veio dados na intent: " + dados.toString());
-            //cadastro = (Cadastro) dados.get("cad");
-            //Log.d("EMControle", String.valueOf(cadastro));
             cadastro = cadastroDAO.buscaCadastro();
             helper.populaCadastro(this);
         }
@@ -130,26 +126,47 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 CadastroDAO dao = new CadastroDAO(this);
 
                 Log.d("EMControle", "Botao salvar selecionado");
-                Log.d("EMControle", dao.existeCadastro().toString());
-                //dao.insere(cadastro);
 
-                if (dao.existeCadastro()){
-                    Log.d("EMControle", "Existe cadastro no banco");
-                    dao.atualiza(cadastro);
-                } else{
-                    Log.d("EMControle", "Nao existe cadastro no banco");
-                    dao.insere(cadastro);
+                if (cadastroValido()) {
+
+                    if (dao.existeCadastro()){
+                        Log.d("EMControle", "Existe cadastro no banco");
+                        dao.atualiza(cadastro);
+                    } else{
+                        Log.d("EMControle", "Nao existe cadastro no banco");
+                        dao.insere(cadastro);
+                    }
+
+                    dao.close();
+
+                    Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
+                    intent1.putExtra("cadastro", cadastro);
+                    startActivity(intent1);
+
                 }
 
-                dao.close();
-
-                Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
-                intent1.putExtra("cadastro", cadastro);
-                startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean cadastroValido() {
+        boolean valido = true;
+        if (txtHora.getText().length() == 0) {
+            txtHora.setError("Hora obrigatória!");
+            valido = false;
+        }
+        if (txtData.getText().length() == 0) {
+            txtData.setError("Data obrigatória!");
+            valido = false;
+        }
+        if (txtNome.getText().length() == 0) {
+            txtNome.setError("Nome obrigatório!");
+            valido = false;
+        }
+
+        return valido;
     }
 
     @Override
@@ -166,7 +183,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                            txtData.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year));
+                            txtData.setText(formata(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year));
                         }
                     }, ano, mes, dia);
 
@@ -186,7 +203,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
-                            txtHora.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+                            txtHora.setText(formata(hourOfDay) + ":" + formata(minute));
                         }
                     }, hora, minuto, false);
 
@@ -215,6 +232,14 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             });
             dialog.show();
         }
+    }
+
+    private String formata(int numero) {
+        String numeroFormatado = String.valueOf(numero);
+        if (numero < 10) {
+            numeroFormatado =  '0' + numeroFormatado;
+        }
+        return numeroFormatado;
     }
 
     @Override

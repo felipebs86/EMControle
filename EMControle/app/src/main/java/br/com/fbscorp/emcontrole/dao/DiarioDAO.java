@@ -40,7 +40,6 @@ public class DiarioDAO extends SQLiteOpenHelper{
             Diario diario = new Diario();
             diario.setId(cursor.getInt(cursor.getColumnIndex("id")));
             diario.setData(cursor.getString(cursor.getColumnIndex("data")));
-            diario.setHora(cursor.getString(cursor.getColumnIndex("hora")));
             diario.setTexto(cursor.getString(cursor.getColumnIndex("texto")));
             diarios.add(diario);
         }
@@ -55,11 +54,33 @@ public class DiarioDAO extends SQLiteOpenHelper{
         ContentValues dados = new ContentValues();
 
         dados.put("data", diario.getData());
-        dados.put("hora", diario.getHora());
         dados.put("texto", diario.getTexto());
 
         db.insert("diario", null, dados);
 
         db.close();
+    }
+
+    public void atualiza(Diario diario){
+        Log.d("EMControle", "Atualizando diario no banco");
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues dados = new ContentValues();
+
+        dados.put("data", diario.getData());
+        dados.put("texto", diario.getTexto());
+        db.update("diario", dados, "id = " + diario.getId(), null);
+
+        db.close();
+    }
+
+    public boolean existeDiario(Diario diario){
+        String sql = "select * from diario where id = " + diario.getId();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(sql, null);
+        if (c.getCount() != 0) {
+            return true;
+        }
+        return false;
+
     }
 }

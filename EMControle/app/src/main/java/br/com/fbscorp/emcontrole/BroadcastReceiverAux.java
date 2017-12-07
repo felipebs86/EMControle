@@ -45,8 +45,8 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
             int hora = c.get(Calendar.HOUR_OF_DAY);
             int minuto = c.get(Calendar.MINUTE);
 
-            String data_sistema = String.valueOf(dia) + "/" + String.valueOf(mes + 1) + "/" + String.valueOf(ano);
-            String hora_sistema = String.valueOf(hora) + ":" + String.valueOf(minuto);
+            String data_sistema = formata(dia) + "/" + formata(mes + 1) + "/" + String.valueOf(ano);
+            String hora_sistema = formata(hora) + ":" + formata(minuto);
 
             if (data_sistema.equals(cadastro.getData()) && hora_sistema.equals(cadastro.getHora())) {
                 Log.d("EMControle", "Gerando nofiticação na tela!");
@@ -79,7 +79,7 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
 
                 if (cadastro.getMedicamento() == 0) {
                     c.add(Calendar.DAY_OF_MONTH, 7);
-                    novaData = String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
                     if (cadastro.getIdLocal() < 4) {
                         cadastro.setIdLocal(cadastro.getIdLocal() + 1);
                     } else {
@@ -87,7 +87,7 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
                     }
                 } else if (cadastro.getMedicamento() == 1) {
                     c.add(Calendar.DAY_OF_MONTH, 1);
-                    novaData = String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
                     if (cadastro.getIdLocal() < 30) {
                         cadastro.setIdLocal(cadastro.getIdLocal() + 1);
                     } else {
@@ -104,5 +104,13 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
 
             }
         }
+    }
+
+    private String formata(int numero) {
+        String numeroFormatado = String.valueOf(numero);
+        if (numero < 10) {
+            numeroFormatado =  '0' + numeroFormatado;
+        }
+        return numeroFormatado;
     }
 }

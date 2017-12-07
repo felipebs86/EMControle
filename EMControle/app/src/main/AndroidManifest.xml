@@ -3,6 +3,7 @@
     package="br.com.fbscorp.emcontrole">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -13,11 +14,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ActivityCadastro"
-            android:label="@string/app_name"
+            android:label="Configuração - EMControle"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityInicial"
-            android:label="@string/title_activity_inicial"
+            android:label="EMControle"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivitySplashScreen"
@@ -34,6 +35,8 @@
             android:label="BroadcastReceiverAux">
             <intent-filter>
                 <action android:name="ALARME_DISPARADO" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -41,15 +44,15 @@
 
         <activity
             android:name=".ActivityDiario"
-            android:label="@string/title_activity_diario"
+            android:label="Diario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityConteudoDiario"
-            android:label="@string/title_activity_conteudo_diario"
+            android:label="Diario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityLinks"
-            android:label="@string/title_activity_links"
+            android:label="Links Úteis"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

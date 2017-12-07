@@ -9,13 +9,19 @@
     tools:showIn="@layout/activity_conteudo_diario">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:id="@+id/cabecalho_diario"/>
+        android:id="@+id/cabecalho_diario"
+        android:gravity="center"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/conteudo_diario"/>
+        android:layout_width="368dp"
+        android:layout_height="478dp"
+        android:id="@+id/conteudo_diario"
+        tools:layout_editor_absoluteY="25dp"
+        tools:layout_editor_absoluteX="8dp" />
 
 </android.support.constraint.ConstraintLayout>

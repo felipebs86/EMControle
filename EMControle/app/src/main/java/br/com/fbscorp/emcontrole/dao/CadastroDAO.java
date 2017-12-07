@@ -25,7 +25,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         String sql2 = "insert into medicamentos (nome, locais, frequencia) values ('Avonex', 4, 7)";
         String sql3 = "insert into medicamentos (nome, locais, frequencia) values ('Copaxone', 30, 1)";
         Log.d("EMControle", "Criando tabela diario");
-        String sql4 = "create table diario (id integer primary key, data text not null, hora text, texto text);";
+        String sql4 = "create table diario (id integer primary key, data text not null, texto text);";
         Log.d("EMControle", "Criando tabela links");
         String sql5 = "create table links (id integer primary key, titulo text not null, url text);";
         Log.d("EMControle", "Inserindo links no banco");
@@ -47,7 +47,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sql9);
         sqLiteDatabase.execSQL(sql10);
         sqLiteDatabase.execSQL(sql11);
-        String sqlteste = "insert into diario (data, hora, texto) values ('01/01', '12:00', 'TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO ')";
+        String sqlteste = "insert into diario (data, texto) values ('01/01', 'TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO ')";
         sqLiteDatabase.execSQL(sqlteste);
 
     }
