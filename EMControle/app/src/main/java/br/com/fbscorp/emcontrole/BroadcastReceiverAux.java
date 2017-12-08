@@ -74,7 +74,7 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
                     toque.play();
                 }
                 catch(Exception e){}
-
+                /*
                 String novaData = cadastro.getData();
 
                 if (cadastro.getMedicamento() == 0) {
@@ -101,7 +101,7 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
 
                 Log.d("EMControle", "Nova Data: " + novaData);
                 Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
-
+                */
             }
         }
     }

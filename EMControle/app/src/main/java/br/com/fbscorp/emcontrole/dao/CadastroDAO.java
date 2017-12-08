@@ -71,7 +71,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         dados.put("data", cadastro.getData());
         dados.put("horario", cadastro.getHora());
         dados.put("lembrete", cadastro.isLembrete());
-        dados.put("local", cadastro.getIdLocal());
+        dados.put("local", cadastro.getIdLocal() + 1);
 
         db.insert("cadastro", null, dados);
 
@@ -134,7 +134,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
                 cad.setData(c.getString(c.getColumnIndex("data")));
                 cad.setHora(c.getString(c.getColumnIndex("horario")));
                 cad.setLembrete(c.getString(c.getColumnIndex("lembrete")));
-                cad.setIdLocal(c.getInt(c.getColumnIndex("local"))+1);
+                cad.setIdLocal(c.getInt(c.getColumnIndex("local")));
             }
             return cad;
         }

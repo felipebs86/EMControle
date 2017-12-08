@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -37,6 +39,7 @@ public class ActivityInicial extends AppCompatActivity {
     private Cadastro cadastro;
     private TextView txtSaudacao;
     private Calendar c;
+    private AlertDialog alerta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,39 +159,163 @@ public class ActivityInicial extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String novaData = cadastro.getData();
-
-                if (cadastro.getMedicamento() == 0) {
-                    c.add(Calendar.DAY_OF_MONTH, 7);
-                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
-                    if (cadastro.getIdLocal() < 4) {
-                        cadastro.setIdLocal(cadastro.getIdLocal() + 1);
-                    } else {
-                        cadastro.setIdLocal(1);
-                    }
-                } else if (cadastro.getMedicamento() == 1) {
-                    c.add(Calendar.DAY_OF_MONTH, 1);
-                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
-                    if (cadastro.getIdLocal() < 30) {
-                        cadastro.setIdLocal(cadastro.getIdLocal() + 1);
-                    } else {
-                        cadastro.setIdLocal(1);
-                    }
+                String data = cadastro.getData();
+                String dia = data.split("/")[0];
+                //String mes = data.split("/")[1];
+                //String ano = data.split("/")[2];
+                String horario = cadastro.getHora();
+                String hora = horario.split(":")[0];
+                String min = horario.split(":")[1];
+                if (dia.equals(String.valueOf(c.get(Calendar.DAY_OF_MONTH))) && hora.equals(String.valueOf(c.get(Calendar.HOUR_OF_DAY)))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityInicial.this);
+                    builder.setTitle("Registrar aplicação");
+                    builder.setMessage("Confirma aplicação da medicação?");
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            realizaAplicacao();
+                        }
+                    });
+                    builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) { }
+                    });
+                    alerta = builder.create();
+                    alerta.show();
+                } else if (dia.equals(String.valueOf(c.get(Calendar.DAY_OF_MONTH))) && !hora.equals(String.valueOf(c.get(Calendar.HOUR_OF_DAY)))) {
+                    final String novoHorario = Calendar.HOUR_OF_DAY + ":" + Calendar.MINUTE;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityInicial.this);
+                    builder.setTitle("Registrar aplicação");
+                    builder.setMessage("Confirma aplicação da medicação e alteração ho horario para" + novoHorario + "?");
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            realizaAplicacao(novoHorario);
+                        }
+                    });
+                    builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) { }
+                    });
+                    alerta = builder.create();
+                    alerta.show();
+                } else if (!dia.equals(String.valueOf(c.get(Calendar.DAY_OF_MONTH))) && !hora.equals(String.valueOf(c.get(Calendar.HOUR_OF_DAY)))) {
+                    final String novoHorario = Calendar.HOUR_OF_DAY + ":" + Calendar.MINUTE;
+                    final String novaData = Calendar.DAY_OF_MONTH + "/" + Calendar.MONTH + Calendar.YEAR;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityInicial.this);
+                    builder.setTitle("Registrar aplicação");
+                    builder.setMessage("Confirma aplicação da medicação e alteração da data para "+novaData+ " e o horario para " + novoHorario + "?");
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            realizaAplicacao(novoHorario, novaData);
+                        }
+                    });
+                    builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) { }
+                    });
+                    alerta = builder.create();
+                    alerta.show();
                 }
 
-                cadastro.setData(novaData);
-
-                CadastroDAO dao = new CadastroDAO(ActivityInicial.this);
-
-                dao.atualiza(cadastro);
-
-                Log.d("EMControle", "Nova Data: " + novaData);
-                Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
-
-                onRestart();
             }
+
+
         });
 
+    }
+
+    private void realizaAplicacao(String novoHorario, String novaData) {
+        cadastro.setData(novaData);
+        String novaDataAtualizada = cadastro.getData();
+
+        if (cadastro.getMedicamento() == 0) {
+            c.add(Calendar.DAY_OF_MONTH, 7);
+            novaDataAtualizada = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+            if (cadastro.getIdLocal() < 4) {
+                cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+            } else {
+                cadastro.setIdLocal(1);
+            }
+        } else if (cadastro.getMedicamento() == 1) {
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+            if (cadastro.getIdLocal() < 30) {
+                cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+            } else {
+                cadastro.setIdLocal(1);
+            }
+        }
+
+        cadastro.setData(novaDataAtualizada);
+        cadastro.setHora(novoHorario);
+
+        CadastroDAO dao = new CadastroDAO(ActivityInicial.this);
+
+        dao.atualiza(cadastro);
+
+        Log.d("EMControle", "Nova Data: " + novaDataAtualizada);
+        Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
+        Log.d("EMControle", "AAAAAAAAAAAAAAAAAAAAAAAA");
+    }
+
+    private void realizaAplicacao(String novoHorario) {
+        String novaData = cadastro.getData();
+
+        if (cadastro.getMedicamento() == 0) {
+            c.add(Calendar.DAY_OF_MONTH, 7);
+            novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+            if (cadastro.getIdLocal() < 4) {
+                cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+            } else {
+                cadastro.setIdLocal(1);
+            }
+        } else if (cadastro.getMedicamento() == 1) {
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+            if (cadastro.getIdLocal() < 30) {
+                cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+            } else {
+                cadastro.setIdLocal(1);
+            }
+        }
+
+        cadastro.setData(novaData);
+        cadastro.setHora(novoHorario);
+
+        CadastroDAO dao = new CadastroDAO(ActivityInicial.this);
+
+        dao.atualiza(cadastro);
+
+        Log.d("EMControle", "Nova Data: " + novaData);
+        Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
+
+    }
+
+    private void realizaAplicacao() {
+        String novaData = cadastro.getData();
+
+        if (cadastro.getMedicamento() == 0) {
+            c.add(Calendar.DAY_OF_MONTH, 7);
+            novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+            if (cadastro.getIdLocal() < 4) {
+                cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+            } else {
+                cadastro.setIdLocal(1);
+            }
+        } else if (cadastro.getMedicamento() == 1) {
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+            if (cadastro.getIdLocal() < 30) {
+                cadastro.setIdLocal(cadastro.getIdLocal() + 1);
+            } else {
+                cadastro.setIdLocal(1);
+            }
+        }
+
+        cadastro.setData(novaData);
+
+        CadastroDAO dao = new CadastroDAO(ActivityInicial.this);
+
+        dao.atualiza(cadastro);
+
+        Log.d("EMControle", "Nova Data: " + novaData);
+        Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
     }
 
     private String formata(int numero) {
