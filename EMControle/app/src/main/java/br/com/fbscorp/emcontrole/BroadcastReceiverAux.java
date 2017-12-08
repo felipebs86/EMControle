@@ -58,13 +58,13 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
                 builder.setTicker(ticker);
                 builder.setContentTitle(titulo);
                 builder.setContentText(descricao);
+                builder.setAutoCancel(false);
                 builder.setSmallIcon(R.drawable.emcontrole_logo);
                 builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.emcontrole_logo));
                 builder.setContentIntent(p);
 
                 Notification n = builder.build();
                 n.vibrate = new long[]{150, 300, 150, 600};
-                n.flags = Notification.FLAG_AUTO_CANCEL;
                 n.flags = Notification.FLAG_NO_CLEAR;
                 nm.notify(R.drawable.emcontrole_logo, n);
 
