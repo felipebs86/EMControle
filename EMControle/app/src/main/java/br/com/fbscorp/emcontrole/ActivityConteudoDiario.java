@@ -57,13 +57,13 @@ public class ActivityConteudoDiario extends AppCompatActivity {
 
 
         txtCabecalho.setText( "Diario do dia "
-                + String.valueOf(c.get(c.DAY_OF_MONTH))
-                + "/" + String.valueOf(c.get(c.MONTH)+1)
-                + "/" + String.valueOf(c.get(c.YEAR))
+                + formata(c.get(c.DAY_OF_MONTH))
+                + "/" + formata(c.get(c.MONTH)+1)
+                + "/" + formata(c.get(c.YEAR))
                 + " as "
-                + String.valueOf(c.get(c.HOUR_OF_DAY))
+                + formata(c.get(c.HOUR_OF_DAY))
                 + ":"
-                + String.valueOf(c.get(c.MINUTE)));
+                + formata(c.get(c.MINUTE)));
 
 
     }
@@ -91,5 +91,13 @@ public class ActivityConteudoDiario extends AppCompatActivity {
             break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private String formata(int numero) {
+        String numeroFormatado = String.valueOf(numero);
+        if (numero < 10) {
+            numeroFormatado =  '0' + numeroFormatado;
+        }
+        return numeroFormatado;
     }
 }

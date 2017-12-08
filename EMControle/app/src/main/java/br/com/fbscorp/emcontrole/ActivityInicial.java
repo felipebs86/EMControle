@@ -47,7 +47,7 @@ public class ActivityInicial extends AppCompatActivity {
         setContentView(R.layout.activity_inicial);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //final Calendar c = Calendar.getInstance();
+        c = Calendar.getInstance();
         Log.d("EMControle " + this.getLocalClassName(), "Iniciando activity inicial");
 
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
