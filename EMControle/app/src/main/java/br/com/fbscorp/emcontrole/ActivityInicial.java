@@ -173,6 +173,7 @@ public class ActivityInicial extends AppCompatActivity {
                         realizaAplicacao();
                         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         nMgr.cancelAll();
+                        carregaDados();
                     }
                 });
                 builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
@@ -227,7 +228,11 @@ public class ActivityInicial extends AppCompatActivity {
         txtSaudacao.setText("Olá " + cadastro.getNome() + "!");
         txtData.setText(cadastro.getData());
         txtHora.setText(cadastro.getHora());
-        txtLocal.setText(String.valueOf(cadastro.getIdLocal() + 1));
+        if ((cadastro.getMedicamento() == 0 && cadastro.getIdLocal() == 4) || (cadastro.getMedicamento() == 1 && cadastro.getIdLocal() == 30)) {
+            txtLocal.setText(String.valueOf(1));
+        } else {
+            txtLocal.setText(String.valueOf(cadastro.getIdLocal() + 1));
+        }
     }
 
     /*
