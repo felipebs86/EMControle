@@ -69,7 +69,7 @@ public class ActivityInicial extends AppCompatActivity {
 
         cadastro = (Cadastro) dados.get("cadastro");
 
-        txtSaudacao.setText("Olá " + cadastro.getNome() + "!");
+
 
         Log.d("EMControle", cadastro.getNome());
 
@@ -95,9 +95,7 @@ public class ActivityInicial extends AppCompatActivity {
             }
         //}
 
-        txtData.setText(cadastro.getData());
-        txtHora.setText(cadastro.getHora());
-        txtLocal.setText(String.valueOf(cadastro.getIdLocal()));
+
 
         if (cadastro.getMedicamento() == 0){
             imgLocal.setImageResource(R.drawable.aplicacao_avx);
@@ -166,21 +164,26 @@ public class ActivityInicial extends AppCompatActivity {
                 String horario = cadastro.getHora();
                 String hora = horario.split(":")[0];
                 String min = horario.split(":")[1];
-                if (dia.equals(String.valueOf(c.get(Calendar.DAY_OF_MONTH))) && hora.equals(String.valueOf(c.get(Calendar.HOUR_OF_DAY)))) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityInicial.this);
-                    builder.setTitle("Registrar aplicação");
-                    builder.setMessage("Confirma aplicação da medicação?");
-                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            realizaAplicacao();
-                        }
-                    });
-                    builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) { }
-                    });
-                    alerta = builder.create();
-                    alerta.show();
-                } else if (dia.equals(String.valueOf(c.get(Calendar.DAY_OF_MONTH))) && !hora.equals(String.valueOf(c.get(Calendar.HOUR_OF_DAY)))) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityInicial.this);
+                builder.setTitle("Registrar aplicação do medicamento");
+                builder.setMessage("Confirma aplicação da medicação?");
+                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        realizaAplicacao();
+                        NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        nMgr.cancelAll();
+                    }
+                });
+                builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) { }
+                });
+                alerta = builder.create();
+                alerta.show();
+
+                /*
+                //TODO Futura feature para alteração automatica de alarme quando aplicado fora do horario
+                else if (dia.equals(String.valueOf(c.get(Calendar.DAY_OF_MONTH))) && !hora.equals(String.valueOf(c.get(Calendar.HOUR_OF_DAY)))) {
                     final String novoHorario = Calendar.HOUR_OF_DAY + ":" + Calendar.MINUTE;
                     AlertDialog.Builder builder = new AlertDialog.Builder(ActivityInicial.this);
                     builder.setTitle("Registrar aplicação");
@@ -211,7 +214,7 @@ public class ActivityInicial extends AppCompatActivity {
                     });
                     alerta = builder.create();
                     alerta.show();
-                }
+                }*/
 
             }
 
@@ -220,6 +223,15 @@ public class ActivityInicial extends AppCompatActivity {
 
     }
 
+    private void carregaDados() {
+        txtSaudacao.setText("Olá " + cadastro.getNome() + "!");
+        txtData.setText(cadastro.getData());
+        txtHora.setText(cadastro.getHora());
+        txtLocal.setText(String.valueOf(cadastro.getIdLocal() + 1));
+    }
+
+    /*
+    //TODO Futura feature
     private void realizaAplicacao(String novoHorario, String novaData) {
         cadastro.setData(novaData);
         String novaDataAtualizada = cadastro.getData();
@@ -251,7 +263,6 @@ public class ActivityInicial extends AppCompatActivity {
 
         Log.d("EMControle", "Nova Data: " + novaDataAtualizada);
         Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
-        Log.d("EMControle", "AAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     private void realizaAplicacao(String novoHorario) {
@@ -286,7 +297,7 @@ public class ActivityInicial extends AppCompatActivity {
         Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
 
     }
-
+    */
     private void realizaAplicacao() {
         String novaData = cadastro.getData();
 
@@ -326,4 +337,9 @@ public class ActivityInicial extends AppCompatActivity {
         return numeroFormatado;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregaDados();
+    }
 }

@@ -47,9 +47,6 @@ public class CadastroDAO extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sql9);
         sqLiteDatabase.execSQL(sql10);
         sqLiteDatabase.execSQL(sql11);
-        String sqlteste = "insert into diario (data, texto) values ('01/01', 'TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO TEXTO EXEMPLO ')";
-        sqLiteDatabase.execSQL(sqlteste);
-
     }
 
     @Override
@@ -71,7 +68,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         dados.put("data", cadastro.getData());
         dados.put("horario", cadastro.getHora());
         dados.put("lembrete", cadastro.isLembrete());
-        dados.put("local", cadastro.getIdLocal() + 1);
+        dados.put("local", cadastro.getIdLocal());
 
         db.insert("cadastro", null, dados);
 

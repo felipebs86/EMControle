@@ -111,8 +111,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/registrar"
-            android:text="Registrar aplicação"
-            android:background="@drawable/botao_emcontrole"
+            android:text="Registrar aplicação do medicamento"
+            android:background="@drawable/botao_emcontrole_registrar"
             android:textColor="#ffffff"
             android:layout_marginBottom="20dp"/>
 
