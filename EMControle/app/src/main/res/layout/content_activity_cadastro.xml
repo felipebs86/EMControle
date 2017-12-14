@@ -56,12 +56,15 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cad_txt_data"
                 android:hint="DD/MM/AAAA"
-                android:layout_marginRight="30dp"/>
+                android:layout_marginRight="30dp"
+                android:clickable="false"
+                android:textSize="17sp"
+                android:textColor="#000"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -84,12 +87,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cad_txt_hora"
                 android:hint="HH:MM"
-                android:layout_marginRight="30dp"/>
+                android:layout_marginRight="30dp"
+                android:textSize="17sp"
+                android:textColor="#000"/>
 
             <Button
                 android:layout_width="wrap_content"

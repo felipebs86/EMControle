@@ -54,6 +54,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
     private String  imgMedicamento = "Avonex";
     private boolean isCadastrado;
     private TextView txtNome;
+    private TextView txtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         txtNome = (TextView) findViewById(R.id.cad_nome);
         txtData = (TextView) findViewById(R.id.cad_txt_data);
         txtHora = (TextView) findViewById(R.id.cad_txt_hora);
+        txtEmail = (TextView) findViewById(R.id.cad_email);
         btnData = (Button) findViewById(R.id.cad_btn_data);
         btnHora = (Button) findViewById(R.id.cad_btn_alarme);
         btnImagem = (Button) findViewById(R.id.cad_btn_locais);
@@ -166,6 +168,13 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         if (txtNome.getText().length() == 0) {
             txtNome.setError("Nome obrigatório!");
             valido = false;
+        }
+        if (txtEmail.getText().length() != 0) {
+            String email = txtEmail.getText().toString().trim();
+            if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                txtEmail.setError("Email inválido!");
+                valido = false;
+            }
         }
 
         return valido;
