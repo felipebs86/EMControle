@@ -30,7 +30,7 @@ public class CadastroDAO extends SQLiteOpenHelper{
         String sql5 = "create table links (id integer primary key, titulo text not null, url text);";
         Log.d("EMControle", "Inserindo links no banco");
         String sql6 = "insert into links (titulo, url) values ('Amigos Multiplos (AME)', 'http://www.amigosmultiplos.org.br/')";
-        String sql7 = "insert into links (titulo, url) values ('Esclerose Mulipla e Eu', 'http://esclerosemultiplaeeu.blogspot.com.br/')";
+        String sql7 = "insert into links (titulo, url) values ('Esclerose Multipla e Eu', 'http://esclerosemultiplaeeu.blogspot.com.br/')";
         String sql8 = "insert into links (titulo, url) values ('APEMERJ', 'http://apemerj.org.br/site/')";
         String sql9 = "insert into links (titulo, url) values ('AGAPEM', 'http://www.agapem.org.br/portal/')";
         String sql10 = "insert into links (titulo, url) values ('Esclerose Multipla', 'http://esclerosemultipla.com.br')";

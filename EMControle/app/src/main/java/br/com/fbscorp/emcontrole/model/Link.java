@@ -1,9 +1,5 @@
 package br.com.fbscorp.emcontrole.model;
 
-/**
- * Created by felipebahiense on 05/12/17.
- */
-
 public class Link {
     private long id;
     private String titulo;

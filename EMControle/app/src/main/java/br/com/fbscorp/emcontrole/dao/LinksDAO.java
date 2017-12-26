@@ -12,10 +12,6 @@ import java.util.List;
 import br.com.fbscorp.emcontrole.model.Diario;
 import br.com.fbscorp.emcontrole.model.Link;
 
-/**
- * Created by felipebahiense on 05/12/17.
- */
-
 public class LinksDAO extends SQLiteOpenHelper {
     public LinksDAO(Context context) {
         super(context, "emcontrole", null, 1);

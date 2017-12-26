@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fbscorp.emcontrole.model.Diario;
-import br.com.fbscorp.emcontrole.model.Link;
 
 public class DiarioDAO extends SQLiteOpenHelper{
     public DiarioDAO(Context context) {
@@ -57,7 +56,6 @@ public class DiarioDAO extends SQLiteOpenHelper{
         dados.put("texto", diario.getTexto());
 
         db.insert("diario", null, dados);
-
         db.close();
     }
 

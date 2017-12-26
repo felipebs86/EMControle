@@ -51,7 +51,7 @@ public class MedicamentoDAO extends SQLiteOpenHelper{
         }
 
         cursor.close();
-        return medicamentos;
 
+        return medicamentos;
     }
 }

@@ -2,25 +2,18 @@ package br.com.fbscorp.emcontrole;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
-import br.com.fbscorp.emcontrole.dao.CadastroDAO;
 import br.com.fbscorp.emcontrole.dao.DiarioDAO;
 import br.com.fbscorp.emcontrole.helper.DiarioHelper;
-import br.com.fbscorp.emcontrole.model.Cadastro;
 import br.com.fbscorp.emcontrole.model.Diario;
 
 public class ActivityConteudoDiario extends AppCompatActivity {
@@ -55,7 +48,6 @@ public class ActivityConteudoDiario extends AppCompatActivity {
 
         Calendar c  = Calendar.getInstance();
 
-
         txtCabecalho.setText( "Diario do dia "
                 + formata(c.get(c.DAY_OF_MONTH))
                 + "/" + formata(c.get(c.MONTH)+1)
@@ -64,8 +56,6 @@ public class ActivityConteudoDiario extends AppCompatActivity {
                 + formata(c.get(c.HOUR_OF_DAY))
                 + ":"
                 + formata(c.get(c.MINUTE)));
-
-
     }
 
     @Override

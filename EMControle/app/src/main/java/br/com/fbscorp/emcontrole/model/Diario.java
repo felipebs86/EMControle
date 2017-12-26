@@ -2,10 +2,6 @@ package br.com.fbscorp.emcontrole.model;
 
 import java.io.Serializable;
 
-/**
- * Created by felipebahiense on 05/12/17.
- */
-
 public class Diario implements Serializable {
     private int id;
     private String data;

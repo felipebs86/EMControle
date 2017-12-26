@@ -1,23 +1,13 @@
 package br.com.fbscorp.emcontrole;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Parcelable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-
-import java.util.List;
 
 import br.com.fbscorp.emcontrole.dao.CadastroDAO;
-import br.com.fbscorp.emcontrole.dao.MedicamentoDAO;
 import br.com.fbscorp.emcontrole.model.Cadastro;
-import br.com.fbscorp.emcontrole.model.Medicamento;
 
 
 public class ActivitySplashScreen extends AppCompatActivity {

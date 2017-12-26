@@ -13,9 +13,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import br.com.fbscorp.emcontrole.dao.CadastroDAO;
 import br.com.fbscorp.emcontrole.model.Cadastro;
@@ -74,34 +72,6 @@ public class BroadcastReceiverAux extends BroadcastReceiver {
                     toque.play();
                 }
                 catch(Exception e){}
-                /*
-                String novaData = cadastro.getData();
-
-                if (cadastro.getMedicamento() == 0) {
-                    c.add(Calendar.DAY_OF_MONTH, 7);
-                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
-                    if (cadastro.getIdLocal() < 4) {
-                        cadastro.setIdLocal(cadastro.getIdLocal() + 1);
-                    } else {
-                        cadastro.setIdLocal(1);
-                    }
-                } else if (cadastro.getMedicamento() == 1) {
-                    c.add(Calendar.DAY_OF_MONTH, 1);
-                    novaData = formata(c.get(Calendar.DAY_OF_MONTH)) + "/" + formata(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
-                    if (cadastro.getIdLocal() < 30) {
-                        cadastro.setIdLocal(cadastro.getIdLocal() + 1);
-                    } else {
-                        cadastro.setIdLocal(1);
-                    }
-                }
-
-                cadastro.setData(novaData);
-
-                dao.atualiza(cadastro);
-
-                Log.d("EMControle", "Nova Data: " + novaData);
-                Log.d("EMControle", "Novo Local: " + cadastro.getIdLocal());
-                */
             }
         }
     }
