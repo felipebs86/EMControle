@@ -19,7 +19,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/ini_saudacao"
             android:textColor="#ffffff"
-            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:textStyle="bold"/>
 
@@ -29,6 +31,27 @@
             android:orientation="vertical"
             android:gravity="center"
             android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medicamento selecionado: "
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/init_txt_medicamento"
+                    android:text="exemplo1"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,12 +117,14 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="200dp"
+                android:layout_width="225dp"
+                android:layout_height="275dp"
                 android:id="@+id/init_img"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="3dp"/>
+                android:padding="3dp"
+                android:tooltipText="Clique para ampliar"
+                />
 
         </LinearLayout>
         <ListView
@@ -112,7 +137,7 @@
             android:layout_height="match_parent"
             android:id="@+id/registrar"
             android:text="Registrar aplicação do medicamento"
-            android:background="@drawable/botao_emcontrole_registrar"
+            android:background="@drawable/botao_emcontrole_confirmacao"
             android:textColor="#ffffff"
             android:layout_marginBottom="20dp"/>
 
@@ -121,7 +146,7 @@
             android:layout_height="match_parent"
             android:id="@+id/btn_lista_diario"
             android:text="Diario"
-            android:background="@drawable/botao_emcontrole"
+            android:background="@drawable/botao_emcontrole_menu"
             android:textColor="#ffffff"/>
 
         <Button
@@ -129,7 +154,7 @@
             android:layout_height="match_parent"
             android:id="@+id/btn_lista_links"
             android:text="Links úteis"
-            android:background="@drawable/botao_emcontrole"
+            android:background="@drawable/botao_emcontrole_menu"
             android:textColor="#ffffff"/>
 
         <Button
@@ -137,7 +162,7 @@
             android:layout_height="match_parent"
             android:id="@+id/teste"
             android:text="Configurações"
-            android:background="@drawable/botao_emcontrole"
+            android:background="@drawable/botao_emcontrole_menu"
             android:textColor="#ffffff"/>
 
     </LinearLayout>

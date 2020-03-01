@@ -28,7 +28,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
             public void run() {
                 vaiParaActivity(cadastro);
             }
-        }, 2000);
+        }, 500);
 
     }
 

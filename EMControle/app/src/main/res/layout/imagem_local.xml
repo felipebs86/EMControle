@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cad_imagem_local"/>

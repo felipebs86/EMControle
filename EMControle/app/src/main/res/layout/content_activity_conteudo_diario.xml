@@ -18,8 +18,11 @@
         tools:layout_editor_absoluteX="8dp" />
 
     <EditText
-        android:layout_width="368dp"
-        android:layout_height="478dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:id="@+id/conteudo_diario"
         tools:layout_editor_absoluteY="25dp"
         tools:layout_editor_absoluteX="8dp" />

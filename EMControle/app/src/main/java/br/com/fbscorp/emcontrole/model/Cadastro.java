@@ -7,8 +7,11 @@ public class Cadastro implements Serializable{
     private String nome;
     private String email;
     private int medicamento;
-    private String data;
+    private String dia;
+    private String mes;
+    private String ano;
     private String hora;
+    private String minuto;
     private String lembrete;
     private int idLocal;
 
@@ -44,20 +47,44 @@ public class Cadastro implements Serializable{
         this.medicamento = medicamento;
     }
 
-    public String getData() {
-        return data;
+    public String getDia() {
+        return dia;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public String getMes() {
+        return mes;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
     }
 
     public String getHora() {
         return hora;
     }
 
+    public String getMinuto() {
+        return minuto;
+    }
+
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public void setMinuto(String minuto) {
+        this.minuto = minuto;
     }
 
     public String isLembrete() {

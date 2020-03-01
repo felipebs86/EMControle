@@ -40,8 +40,11 @@ public class CadastroHelper {
         Log.d("EMControle - " + this.getClass(), med.getNome());
         cadastro.setMedicamento(medicamento.getSelectedItemPosition());
         Log.d("EMControle - " + this.getClass(), String.valueOf(medicamento.getSelectedItemPosition()));
-        cadastro.setData(txtData.getText().toString());
-        cadastro.setHora(txtHora.getText().toString());
+        cadastro.setDia(txtData.getText().toString().split("/")[0]);
+        cadastro.setMes(txtData.getText().toString().split("/")[1]);
+        cadastro.setAno(txtData.getText().toString().split("/")[2]);
+        cadastro.setHora(txtHora.getText().toString().split(":")[0]);
+        cadastro.setMinuto(txtHora.getText().toString().split(":")[1]);
         if (lembrete.isChecked()){
             cadastro.setLembrete("true");
         } else{
@@ -56,11 +59,12 @@ public class CadastroHelper {
     public void populaCadastro(Context context){
         CadastroDAO dao = new CadastroDAO(context);
         Cadastro cadastro = dao.buscaCadastro();
+        dao.close();
         nome.setText(cadastro.getNome());
         email.setText(cadastro.getEmail());
         medicamento.setSelection(cadastro.getMedicamento());
-        txtData.setText(cadastro.getData());
-        txtHora.setText(cadastro.getHora());
+        txtData.setText(String.format("%s/%s/%s", cadastro.getDia(), cadastro.getMes(), cadastro.getAno()));
+        txtHora.setText(String.format("%s:%s", cadastro.getHora(), cadastro.getMinuto()));
         if (cadastro.isLembrete().equalsIgnoreCase("true")){
             lembrete.setChecked(true);
         }

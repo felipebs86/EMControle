@@ -77,6 +77,7 @@ public class ActivityConteudoDiario extends AppCompatActivity {
                 } else{
                     dao.insere(diario);
                 }
+                dao.close();
                 finish();
             break;
         }

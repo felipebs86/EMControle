@@ -1,7 +1,9 @@
 package br.com.fbscorp.emcontrole;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -36,6 +38,7 @@ import br.com.fbscorp.emcontrole.dao.MedicamentoDAO;
 import br.com.fbscorp.emcontrole.helper.CadastroHelper;
 import br.com.fbscorp.emcontrole.model.Cadastro;
 import br.com.fbscorp.emcontrole.model.Medicamento;
+import br.com.fbscorp.emcontrole.service.NotificationService;
 
 public class ActivityCadastro extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -100,6 +103,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             cadastro = cadastroDAO.buscaCadastro();
             helper.populaCadastro(this);
         }
+        cadastroDAO.close();
     }
 
     private List<Integer> populaLocais(int locais) {
@@ -138,6 +142,9 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
 
                     dao.close();
 
+                    NotificationService notificationService = new NotificationService();
+                    notificationService.configuraAlarme(cadastro, this);
+
                     Toast.makeText(ActivityCadastro.this, cadastro.getNome() + ", seu cadastro foi salvo!", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
                     intent1.putExtra("cadastro", cadastro);
@@ -148,6 +155,20 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        CadastroDAO dao = new CadastroDAO(this);
+        if (dao.existeCadastro()) {
+            Cadastro cadastro = helper.pegaCadastro();
+            Intent intent1 = new Intent(ActivityCadastro.this, ActivityInicial.class);
+            intent1.putExtra("cadastro", cadastro);
+            startActivity(intent1);
+        } else {
+            finish();
+        }
     }
 
     private boolean cadastroValido() {
@@ -228,6 +249,18 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 image.setImageResource(R.drawable.aplicacao_cpx);
             } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("avonex")) {
                 image.setImageResource(R.drawable.aplicacao_avx);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("rebif")) {
+                image.setImageResource(R.drawable.aplicacao_cpx);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("betaferon")) {
+                image.setImageResource(R.drawable.aplicacao_cpx);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("Tysabri")) {
+                image.setImageResource(R.drawable.aplicacao_tys);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("gilenya")) {
+                image.setImageResource(R.drawable.aplicacao_gil);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("aubagio")) {
+                image.setImageResource(R.drawable.aplicacao_aub);
+            } else if (medicamentoSelecionado.getNome().equalsIgnoreCase("tecfidera")) {
+                image.setImageResource(R.drawable.aplicacao_tec);
             }
 
             FloatingActionButton dialogButton = (FloatingActionButton) dialog.findViewById(R.id.cad_imagem_fechar);
