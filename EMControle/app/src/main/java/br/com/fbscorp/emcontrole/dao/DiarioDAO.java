@@ -32,7 +32,7 @@ public class DiarioDAO extends SQLiteOpenHelper{
 
         Log.d("EMControle", "Buscando diarios no banco");
         SQLiteDatabase db = getReadableDatabase();
-        String sql = "select * from diario;";
+        String sql = "select * from diario order by data desc;";
 
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()){

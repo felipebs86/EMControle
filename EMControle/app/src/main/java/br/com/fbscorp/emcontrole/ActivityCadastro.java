@@ -211,7 +211,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                            txtData.setText(formata(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year));
+                            txtData.setText(formata(dayOfMonth) + "/" + formata(monthOfYear + 1) + "/" + String.valueOf(year));
                         }
                     }, ano, mes, dia);
 
