@@ -63,6 +63,8 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_cadastro);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         helper = new CadastroHelper(this);
 
@@ -112,6 +114,12 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
             lista.add(i);
         }
         return lista;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

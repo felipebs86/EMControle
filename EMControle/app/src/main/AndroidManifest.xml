@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ActivityCadastro"
-            android:label="Configuração - EMControle"
+            android:label="Configurações"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityInicial"

@@ -36,6 +36,7 @@ import br.com.fbscorp.emcontrole.service.NotificationService;
 public class ActivityInicial extends AppCompatActivity {
 
     private TextView txtData, txtHora, txtLocal, txtMedicamento;
+    private TextView txtLabelLocal;
     private ImageView imgLocal;
     private Cadastro cadastro;
     private TextView txtSaudacao;
@@ -57,6 +58,7 @@ public class ActivityInicial extends AppCompatActivity {
         imgLocal = (ImageView) findViewById(R.id.init_img);
         txtHora = (TextView) findViewById(R.id.init_txt_hora);
         txtLocal = (TextView) findViewById(R.id.init_txt_local);
+        txtLabelLocal = findViewById(R.id.label_txt_local);
         txtSaudacao = (TextView) findViewById(R.id.ini_saudacao);
         Button bt = (Button) findViewById(R.id.teste);
         Button btnDiario = (Button) findViewById(R.id.btn_lista_diario);
@@ -205,14 +207,25 @@ public class ActivityInicial extends AppCompatActivity {
     }
 
     private void carregaDados() {
-        txtSaudacao.setText("Olá " + cadastro.getNome() + "!");
+        txtSaudacao.setText(String.format("Olá %s!", cadastro.getNome()));
         txtMedicamento.setText(selecionaNomeDoMedicamento(cadastro.getMedicamento()));
         txtData.setText(String.format("%s/%s/%s", cadastro.getDia(), cadastro.getMes(), cadastro.getAno()));
         txtHora.setText(String.format("%s:%s", cadastro.getHora(), cadastro.getMinuto()));
         if ((cadastro.getMedicamento() == 0 && cadastro.getIdLocal() == 4) || (cadastro.getMedicamento() == 1 && cadastro.getIdLocal() == 30)) {
             txtLocal.setText(String.valueOf(1));
         } else {
-            txtLocal.setText(String.valueOf(cadastro.getIdLocal() + 1));
+            List medicamentosSemLocal = new ArrayList();
+            medicamentosSemLocal.add(4);
+            medicamentosSemLocal.add(5);
+            medicamentosSemLocal.add(6);
+            medicamentosSemLocal.add(7);
+
+            if (!medicamentosSemLocal.contains(cadastro.getMedicamento())){
+                txtLocal.setText(String.valueOf(cadastro.getIdLocal() + 1));
+            } else {
+                txtLocal.setVisibility(View.INVISIBLE);
+                txtLabelLocal.setVisibility(View.INVISIBLE);
+            }
         }
     }
 

@@ -28,6 +28,8 @@ public class ActivityDiario extends AppCompatActivity {
         setContentView(R.layout.activity_diario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,12 @@ public class ActivityDiario extends AppCompatActivity {
 
         ArrayAdapter<Diario> adapter = new ArrayAdapter<Diario>(this, android.R.layout.simple_list_item_1, diarios);
         listaDiarios.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

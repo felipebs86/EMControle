@@ -25,6 +25,8 @@ public class ActivityLinks extends AppCompatActivity {
         setContentView(R.layout.activity_links);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listaLinks = (ListView) findViewById(R.id.lista_links);
 
@@ -46,6 +48,12 @@ public class ActivityLinks extends AppCompatActivity {
 
         ArrayAdapter<Link> adapter = new ArrayAdapter<Link>(this, android.R.layout.simple_list_item_1, links);
         listaLinks.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
