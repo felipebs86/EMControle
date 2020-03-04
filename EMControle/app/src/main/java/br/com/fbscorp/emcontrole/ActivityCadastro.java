@@ -301,18 +301,15 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 spnLocais.setAdapter(spinnerLocaisArrayAdapter);
 
                 if (isCadastrado) {
-                    if (cadastro.getIdLocal() <= 3) {
-                        Log.d("EMControle", String.valueOf(spnMedicamentos.getSelectedItemPosition()));
-                        spnLocais.setSelection(cadastro.getIdLocal());
-                    } else if (spnMedicamentos.getSelectedItemPosition() == 1) {
-                        Log.d("EMControle", String.valueOf(spnMedicamentos.getSelectedItemPosition()));
+                    if (cadastro.getIdLocal() == locais.size()) {
+                        spnLocais.setSelection(0);
+                    } else if (cadastro.getIdLocal() > locais.size()) {
+                        spnLocais.setSelection(locais.size() - 1);
+                    } else {
                         spnLocais.setSelection(cadastro.getIdLocal());
                     }
                 }
 
-                break;
-
-            case R.id.cad_id_local:
                 break;
         }
     }
