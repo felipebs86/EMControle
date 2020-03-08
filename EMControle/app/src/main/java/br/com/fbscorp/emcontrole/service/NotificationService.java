@@ -41,7 +41,7 @@ public class NotificationService {
 
             c.clear(Calendar.SECOND);
 
-            alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 60000, p);
+            alarme.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), p);
             Log.i("EMControle", "Novo alarme configurado - " + c.getTimeInMillis());
         }
     }
