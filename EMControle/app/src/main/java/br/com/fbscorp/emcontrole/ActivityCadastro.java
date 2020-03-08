@@ -297,7 +297,7 @@ public class ActivityCadastro extends AppCompatActivity implements View.OnClickL
                 medicamentoSelecionado = (Medicamento) spnMedicamentos.getSelectedItem();
                 List<Integer> locais = populaLocais(medicamentoSelecionado.getLocais());
                 ArrayAdapter<Integer> spinnerLocaisArrayAdapter = new ArrayAdapter<>(this, R.layout.emcontrole_spinner_dropdown_item, locais);
-                spinnerLocaisArrayAdapter.setDropDownViewResource(R.layout.emcontrole_spinner_item);
+                spinnerLocaisArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 spnLocais.setAdapter(spinnerLocaisArrayAdapter);
 
                 if (isCadastrado) {
