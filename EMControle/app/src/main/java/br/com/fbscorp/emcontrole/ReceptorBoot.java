@@ -9,6 +9,9 @@ import android.util.Log;
 
 import java.util.Calendar;
 
+import br.com.fbscorp.emcontrole.dao.CadastroDAO;
+import br.com.fbscorp.emcontrole.model.Cadastro;
+
 import static android.content.Context.ALARM_SERVICE;
 
 /**
@@ -22,12 +25,21 @@ public class ReceptorBoot extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i("EMControle", "Novo alarme");
 
-        Intent intent1 = new Intent("ALARME_DISPARADO");
+        CadastroDAO dao = new CadastroDAO(context);
+        Cadastro cadastro = dao.buscaCadastro();
+
+        Intent intent1 = new Intent("ALARME_DISPARADO").putExtra("cadastro", cadastro);;
         PendingIntent p = PendingIntent.getBroadcast(context, 0, intent1, 0);
 
-        c = Calendar.getInstance();
-        c.setTimeInMillis(System.currentTimeMillis());
-        c.add(Calendar.SECOND, 3);
+        Calendar c = Calendar.getInstance();
+
+        c.set(Integer.parseInt(cadastro.getAno()),
+                Integer.parseInt(cadastro.getMes()) - 1,
+                Integer.parseInt(cadastro.getDia()),
+                Integer.parseInt(cadastro.getHora()),
+                Integer.parseInt(cadastro.getMinuto()));
+
+        c.clear(Calendar.SECOND);
 
         AlarmManager alarme = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarme.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), p);
